@@ -1,4 +1,33 @@
-{
-	"a": "apple",
-	"b": "banana"
-}
+[
+  {
+    "title": "Nickel City", 
+    "description": "Arcade games for a nickel! Great for a cheap date.",
+    "price": "5.00", 
+    "tags": "cheap, gaming, arcade, nickel, date", 
+    "seasons": "spring, summer, fall, winter", 
+    "address": "1515 S State St, Orem, UT 84097",
+    "creator": "alphaMale",
+    "upvotes": "45",
+    "comments" : [
+      {
+        "user": "Blue42",
+        "comment": "Great Place! Had tons of fun here."
+      },
+      {
+        "user": "Red5",
+        "comment": "Some of the machines were broken. Overall great place."
+      }
+    ]
+  },
+  {
+    "title": "Frisbee Golf", 
+    "description": "Go to a park and pick targets to make a course.",
+    "price": "0.00", 
+    "tags": "free, outdoors, frisbee, golf", 
+    "seasons": "spring, summer, fall", 
+    "address": "Any Park",
+    "creator": "Blue42",
+    "upvotes": "3",
+    "comments": []
+  }
+]

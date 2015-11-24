@@ -10,6 +10,35 @@ p {
 	font-size: 18px;
 }
 
+pVotes {
+	font-size: 16px;
+	color: #003366;
+}
+
+pTitle {
+	font-size: 20px;
+	color: #003366;
+}
+
+pDesc {
+	font-style: italic;
+}
+
+#rightAlign {
+    text-align: right;
+    float: right;
+}
+
+.rcorners {
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px; 
+    /*
+    width: 200px;
+    height: 150px; 
+    */
+}
+
 /*!
  * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
