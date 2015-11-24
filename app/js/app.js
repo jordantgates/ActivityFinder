@@ -4,6 +4,60 @@ var Router = ReactRouter.Router;
 var Link = ReactRouter.Link;
 var Route = ReactRouter.Route;
 
+var DATA = [
+  {
+    "title": "Nickel City", 
+    "description": "Arcade games for a nickel! Great for a cheap date.",
+    "price": "5.00", 
+    "tags": "cheap, gaming, arcade, nickel, date", 
+    "seasons": "spring, summer, fall, winter", 
+    "address": "1515 S State St, Orem, UT 84097",
+    "creator": "alphaMale",
+    "upvotes": "45",
+    "comments" : [
+      {
+        "user": "Blue42",
+        "comment": "Great Place! Had tons of fun here."
+      },
+      {
+        "user": "Red5",
+        "comment": "Some of the machines were broken. Overall great place."
+      }
+    ]
+  },
+  {
+    "title": "Frisbee Golf", 
+    "description": "Go to a park and pick targets to make a course.",
+    "price": "0.00", 
+    "tags": "free, outdoors, frisbee, golf", 
+    "seasons": "spring, summer, fall", 
+    "address": "",
+    "creator": "Blue42",
+    "upvotes": "3",
+    "comments": []
+  }
+];
+
+var ActivityList = React.createClass({
+    render: function() {
+        return (
+          <div>
+            { this.props.data.map(function(item) {
+                    return (
+                      <div>
+                        <div>Title: {item.title}</div>
+                        <div>Description: {item.description}</div>
+                        <div>Up Votes: {item.upvotes}</div>
+                        <br/><br/>
+                      </div>
+                      );
+                })
+            }
+          </div>
+        );
+    }
+});
+
 var Home = React.createClass({
   render: function(){
     return (
@@ -54,8 +108,10 @@ var Home = React.createClass({
                 <div className="row">
                     <div className="col-lg-12">
                         <h1>Welcome to Activity Finder</h1>
-                        <p>Use the filters on the left to find the perfect activity!</p>
+                        <p>Use the filters on the left to find the perfect activity! Or, browse some of our top rated activities:</p>
+                        <br/><br/>
                     </div>
+                    <ActivityList data={DATA} />
                 </div>
             </div>
         </div>
