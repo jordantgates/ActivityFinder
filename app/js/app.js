@@ -11,30 +11,40 @@ var Home = React.createClass({
         <div id="sidebar-wrapper">
             <ul className="sidebar-nav">
                 <li className="sidebar-brand">
-                    <a href="#">
-                        Start Bootstrap
-                    </a>
+                        Search Filters
                 </li>
                 <li>
-                    <a href="#">Dashboard</a>
+                    <a href="#">Clear Filters</a>
                 </li>
                 <li>
-                    <a href="#">Shortcuts</a>
+                    Key words
+                    <input type="text" className="form-control" placeholder="e.g. outdoors, date, cheap" />
                 </li>
                 <li>
-                    <a href="#">Overview</a>
+                    Price Range
+                    <p>
+                    $<input type="text" size="5" placeholder="0" />
+                     &nbsp;-&nbsp; 
+                    $<input type="text" size="5" placeholder="10" />
+                    </p>
                 </li>
                 <li>
-                    <a href="#">Events</a>
+                    Season
+                    <div className="checkbox">
+                      <label><input type="checkbox" value=""/>Spring</label>
+                      <label><input type="checkbox" value=""/>Summer</label>
+                    </div>
+                    <div className="checkbox">
+                      <label><input type="checkbox" value=""/>Fall</label>
+                      <label><input type="checkbox" value=""/>Winter</label>
+                    </div>
                 </li>
                 <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
+                    Distance
+                    <p>
+                    <input type="text" size="5" placeholder="15" />
+                    &nbsp;miles
+                    </p>
                 </li>
             </ul>
         </div>
@@ -44,7 +54,7 @@ var Home = React.createClass({
                 <div className="row">
                     <div className="col-lg-12">
                         <h1>Welcome to Activity Finder</h1>
-                        <p>This is some lovely text.</p>
+                        <p>Use the filters on the left to find the perfect activity!</p>
                     </div>
                 </div>
             </div>

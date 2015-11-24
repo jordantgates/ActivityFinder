@@ -6,6 +6,10 @@ h1 {
 	color: #003366;
 }
 
+p {
+	font-size: 18px;
+}
+
 /*!
  * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
@@ -76,6 +80,7 @@ h1 {
     display: block;
     text-decoration: none;
     color: #000000;
+    font-size: 18px;
 }
 
 .sidebar-nav li a:hover {
@@ -91,12 +96,13 @@ h1 {
 
 .sidebar-nav > .sidebar-brand {
     height: 65px;
-    font-size: 18px;
+    font-size: 17px;
     line-height: 60px;
 }
 
-.sidebar-nav > .sidebar-brand a {
-    color: #999999;
+.sidebar-nav > .sidebar-brand {
+    color: #000000;
+    font-size: 22px;
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
