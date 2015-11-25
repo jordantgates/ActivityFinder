@@ -13,7 +13,7 @@ var ActivityList = React.createClass({
                         <div><pTitle>{item.title}</pTitle></div>
                         <div><pDesc>{item.description}</pDesc></div>
                         <div>Price: ${item.price}</div>
-                        <div>address: {item.address}</div>
+                        <div>Address: {item.address}</div>
                         <div>Up Votes: <pVotes>{item.upvotes}</pVotes></div>
                         <br/>
                         <button onClick={this.handleClick.bind(this, item)}id="rightAlign">Show Comments</button>

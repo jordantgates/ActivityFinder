@@ -2,6 +2,16 @@
 var app = require('./models/express.js');
 var home = require('./models/express.js');
 
+
+//setup mongoose
+var mongoose = require('mongoose');
+var db = mongoose.connect('mongodb://localhost/activities');
+
+//models
+var api = require('./models/api.js');
+var User = require('./models/user.js');
+var Activity = require('./models/activity.js');
+
 // start the server
 var server = app.listen(3000, function() {
 console.log("Started on port 3000");

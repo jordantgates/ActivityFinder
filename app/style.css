@@ -39,6 +39,16 @@ pDesc {
     */
 }
 
+hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+}
+
 /*!
  * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
@@ -130,8 +140,8 @@ pDesc {
 }
 
 .sidebar-nav > .sidebar-brand {
-    color: #000000;
-    font-size: 22px;
+    color: #003366;
+    font-size: 28px;
 }
 
 .sidebar-nav > .sidebar-brand a:hover {

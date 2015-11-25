@@ -14,7 +14,7 @@ var ActivityList = React.createClass({displayName: "ActivityList",
                         React.createElement("div", null, React.createElement("pTitle", null, item.title)), 
                         React.createElement("div", null, React.createElement("pDesc", null, item.description)), 
                         React.createElement("div", null, "Price: $", item.price), 
-                        React.createElement("div", null, "address: ", item.address), 
+                        React.createElement("div", null, "Address: ", item.address), 
                         React.createElement("div", null, "Up Votes: ", React.createElement("pVotes", null, item.upvotes)), 
                         React.createElement("br", null), 
                         React.createElement("button", {onClick: this.handleClick.bind(this, item), id: "rightAlign"}, "Show Comments"), 
@@ -85,8 +85,8 @@ var DATA = [
     "title": "Nickel City", 
     "description": "Arcade games for a nickel! Great for a cheap date.",
     "price": "5.00", 
-    "tags": "cheap, gaming, arcade, nickel, date", 
-    "seasons": "spring, summer, fall, winter", 
+    "tags": ["cheap", "gaming", "arcade", "nickel", "date"], 
+    "seasons": ["spring", "summer", "fall", "winter"], 
     "address": "1515 S State St, Orem, UT 84097",
     "creator": "alphaMale",
     "upvotes": "45",
@@ -105,11 +105,22 @@ var DATA = [
     "title": "Frisbee Golf", 
     "description": "Go to a park and pick targets to make a course.",
     "price": "0.00", 
-    "tags": "free, outdoors, frisbee, golf", 
-    "seasons": "spring, summer, fall", 
+    "tags": ["free", "utdoors", "frisbee", "golf"], 
+    "seasons": ["spring", "summer", "fall"], 
     "address": "Any Park",
     "creator": "Blue42",
     "upvotes": "3",
+    "comments": []
+  },
+  {
+    "title": "Little Ceasars",
+    "description": "Best cheap dinner option.",
+    "price": "5.39",
+    "tags": ["dinner", "cheap", "pizza", "party"],
+    "season": ["spring", "summer", "fall", "winter"],
+    "address": "434 N 900 EAST, PROVO, UT 84606",
+    "creator": "Ceasar",
+    "upvotes": "139",
     "comments": []
   }
 ];
@@ -122,25 +133,31 @@ var Home = React.createClass({displayName: "Home",
         React.createElement("div", {id: "sidebar-wrapper"}, 
             React.createElement("ul", {className: "sidebar-nav"}, 
                 React.createElement("li", {className: "sidebar-brand"}, 
-                        "Search Filters"
+                        "Filters"
                 ), 
+                React.createElement("hr", null), 
                 React.createElement("li", null, 
-                    React.createElement("a", {href: "#"}, "Clear Filters")
+                    React.createElement("button", {href: "#"}, "Clear Filters"), 
+                    "     ", 
+                    React.createElement("button", {href: "#"}, "Search")
                 ), 
+                React.createElement("hr", null), 
                 React.createElement("li", null, 
-                    "Key words", 
+                    React.createElement("p", null, "Key words"), 
                     React.createElement("input", {type: "text", className: "form-control", placeholder: "e.g. outdoors, date, cheap"})
                 ), 
+                React.createElement("hr", null), 
                 React.createElement("li", null, 
-                    "Price Range", 
+                    React.createElement("p", null, "Price Range"), 
                     React.createElement("p", null, 
                     "$", React.createElement("input", {type: "text", size: "5", placeholder: "0"}), 
                      " - " + ' ' + 
                     "$", React.createElement("input", {type: "text", size: "5", placeholder: "10"})
                     )
                 ), 
+                React.createElement("hr", null), 
                 React.createElement("li", null, 
-                    "Season", 
+                    React.createElement("p", null, "Season"), 
                     React.createElement("div", {className: "checkbox"}, 
                       React.createElement("label", null, React.createElement("input", {type: "checkbox", value: ""}), "Spring"), 
                       React.createElement("label", null, React.createElement("input", {type: "checkbox", value: ""}), "Summer")
@@ -150,8 +167,9 @@ var Home = React.createClass({displayName: "Home",
                       React.createElement("label", null, React.createElement("input", {type: "checkbox", value: ""}), "Winter")
                     )
                 ), 
+                React.createElement("hr", null), 
                 React.createElement("li", null, 
-                    "Distance", 
+                    React.createElement("p", null, "Distance"), 
                     React.createElement("p", null, 
                     React.createElement("input", {type: "text", size: "5", placeholder: "15"}), 
                     " miles"
