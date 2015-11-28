@@ -34,7 +34,7 @@ var App = React.createClass({
 
 var routes = (
   <Router>
-    <Route name="home" path="/" component={Home} />
+    <Route name="home" path="/" component={Home}/>
     <Route path="*" component={Home} />
   </Router>
 );

@@ -6,22 +6,37 @@ var ActivityList = React.createClass({displayName: "ActivityList",
     },
 
     render: function() {
+        this.props.data.sort(function(a,b){
+            return b.upvotes - a.upvotes;
+        })
+
         return (
           React.createElement("div", null, 
              this.props.data.map(function(item, i) {
-                    return (
-                      React.createElement("div", {className: "rcorners", key: i}, 
-                        React.createElement("div", null, React.createElement("pTitle", null, item.title)), 
-                        React.createElement("div", null, React.createElement("pDesc", null, item.description)), 
-                        React.createElement("div", null, "Price: $", item.price), 
-                        React.createElement("div", null, "Address: ", item.address), 
-                        React.createElement("div", null, "Up Votes: ", React.createElement("pVotes", null, item.upvotes)), 
-                        React.createElement("br", null), 
-                        React.createElement("button", {onClick: this.handleClick.bind(this, item), id: "rightAlign"}, "Show Comments"), 
-                        React.createElement("br", null)
-                      )
-                      );
-                }, this)
+              var display = true;
+              if(this.props.keyWords.length > 0){
+                  display = false;
+                  this.props.keyWords.forEach(function(tag){
+                      if(item.tags.indexOf(tag) != -1){
+                          display = true;
+                      }
+                  });
+              }
+              if(display){
+                return (
+                  React.createElement("div", {className: "rcorners", key: i}, 
+                    React.createElement("div", null, React.createElement("pTitle", null, item.title)), 
+                    React.createElement("div", null, React.createElement("pDesc", null, item.description)), 
+                    React.createElement("div", null, "Price: $", item.price), 
+                    React.createElement("div", null, "Address: ", item.address), 
+                    React.createElement("div", null, "Up Votes: ", React.createElement("pVotes", null, item.upvotes)), 
+                    React.createElement("br", null), 
+                    React.createElement("button", {onClick: this.handleClick.bind(this, item), id: "rightAlign"}, "Show Comments"), 
+                    React.createElement("br", null)
+                  )
+                );
+              }
+            }, this)
             
           )
         );
@@ -80,6 +95,7 @@ module.exports = App;
 },{"./home.js":3}],3:[function(require,module,exports){
 var ActivityList = require("./activityList.js");
 
+
 var DATA = [
   {
     "title": "Nickel City", 
@@ -105,7 +121,7 @@ var DATA = [
     "title": "Frisbee Golf", 
     "description": "Go to a park and pick targets to make a course.",
     "price": "0.00", 
-    "tags": ["free", "utdoors", "frisbee", "golf"], 
+    "tags": ["free", "outdoors", "frisbee", "golf"], 
     "seasons": ["spring", "summer", "fall"], 
     "address": "Any Park",
     "creator": "Blue42",
@@ -127,6 +143,18 @@ var DATA = [
 
 
 var Home = React.createClass({displayName: "Home",
+    getInitialState: function(){
+        return {
+            keyWords: []
+        };
+    },
+
+    handleChange: function(){
+        this.setState({
+            keyWords: this.refs.filterText.value.split(', ')
+        })
+    },
+
   render: function(){
     return (
         React.createElement("div", {id: "wrapper"}, 
@@ -144,7 +172,12 @@ var Home = React.createClass({displayName: "Home",
                 React.createElement("hr", null), 
                 React.createElement("li", null, 
                     React.createElement("p", null, "Key words"), 
-                    React.createElement("input", {type: "text", className: "form-control", placeholder: "e.g. outdoors, date, cheap"})
+                    React.createElement("input", {
+                        type: "text", 
+                        className: "form-control", 
+                        placeholder: "e.g. outdoors, date, cheap", 
+                        ref: "filterText", 
+                        onChange: this.handleChange})
                 ), 
                 React.createElement("hr", null), 
                 React.createElement("li", null, 
@@ -188,7 +221,7 @@ var Home = React.createClass({displayName: "Home",
                     )
                 )
             ), 
-            React.createElement(ActivityList, {data: DATA})
+            React.createElement(ActivityList, {data: DATA, keyWords: this.state.keyWords})
         )
 
     )
@@ -196,6 +229,30 @@ var Home = React.createClass({displayName: "Home",
       );
   }
 })
+
+// API object
+var api = {
+    // get the list of activities (sorted), call the callback when complete
+    getItems: function(cb) {
+        var url = "/api/activities";
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            type: 'GET',
+            //headers: {'Authorization': localStorage.token},
+            success: function(res) {
+                if (cb)
+                    cb(true, res);
+            },
+            error: function(xhr, status, err) {
+                // if there is an error, remove the login token
+                delete localStorage.token;
+                if (cb)
+                    cb(false, status);
+            }
+        });
+    }
+};
 
 module.exports = Home;
 

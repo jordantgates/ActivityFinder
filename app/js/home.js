@@ -1,5 +1,6 @@
 var ActivityList = require("./activityList.js");
 
+
 var DATA = [
   {
     "title": "Nickel City", 
@@ -25,7 +26,7 @@ var DATA = [
     "title": "Frisbee Golf", 
     "description": "Go to a park and pick targets to make a course.",
     "price": "0.00", 
-    "tags": ["free", "utdoors", "frisbee", "golf"], 
+    "tags": ["free", "outdoors", "frisbee", "golf"], 
     "seasons": ["spring", "summer", "fall"], 
     "address": "Any Park",
     "creator": "Blue42",
@@ -47,6 +48,18 @@ var DATA = [
 
 
 var Home = React.createClass({
+    getInitialState: function(){
+        return {
+            keyWords: []
+        };
+    },
+
+    handleChange: function(){
+        this.setState({
+            keyWords: this.refs.filterText.value.split(', ')
+        })
+    },
+
   render: function(){
     return (
         <div id="wrapper">
@@ -64,7 +77,12 @@ var Home = React.createClass({
                 <hr/>
                 <li>
                     <p>Key words</p>
-                    <input type="text" className="form-control" placeholder="e.g. outdoors, date, cheap" />
+                    <input 
+                        type="text" 
+                        className="form-control" 
+                        placeholder="e.g. outdoors, date, cheap" 
+                        ref="filterText"
+                        onChange={this.handleChange}/>
                 </li>
                 <hr/>
                 <li>
@@ -108,7 +126,7 @@ var Home = React.createClass({
                     </div>
                 </div>
             </div>
-            <ActivityList data={DATA} />
+            <ActivityList data={DATA} keyWords={this.state.keyWords} />
         </div>
 
     </div>
