@@ -12,7 +12,6 @@ var activitySchema = new Schema({
 	description: String,
 	price: String,
 	tags: [String],
-	seasons: [String],
 	address: String,
 	creator: {type: ObjectId, ref: 'users'},
 	upvotes: String,

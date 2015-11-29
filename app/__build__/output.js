@@ -160,7 +160,6 @@ var DATA = [
     "description": "Arcade games for a nickel! Great for a cheap date.",
     "price": "5.00", 
     "tags": ["cheap", "gaming", "arcade", "nickel", "date"], 
-    "seasons": ["spring", "summer", "fall", "winter"], 
     "address": "1515 S State St, Orem, UT 84097",
     "creator": "alphaMale",
     "upvotes": "45",
@@ -181,7 +180,6 @@ var DATA = [
     "description": "Go to a park and pick targets to make a course.",
     "price": "0.00", 
     "tags": ["free", "outdoors", "frisbee", "golf"], 
-    "seasons": ["spring", "summer", "fall"], 
     "address": "Any Park",
     "creator": "Blue42",
     "upvotes": "3",
@@ -197,7 +195,6 @@ var DATA = [
     "description": "Best cheap dinner option.",
     "price": "5.39",
     "tags": ["dinner", "cheap", "pizza", "party"],
-    "season": ["spring", "summer", "fall", "winter"],
     "address": "434 N 900 EAST, PROVO, UT 84606",
     "creator": "Ceasar",
     "upvotes": "139",
@@ -304,18 +301,6 @@ var Home = React.createClass({displayName: "Home",
                         placeholder: "10", 
                         ref: "priceMax", 
                         onChange: this.handlePriceMax})
-                    )
-                ), 
-                React.createElement("hr", null), 
-                React.createElement("li", null, 
-                    React.createElement("p", null, "Season"), 
-                    React.createElement("div", {className: "checkbox"}, 
-                      React.createElement("label", null, React.createElement("input", {type: "checkbox", value: "spring"}), "Spring"), 
-                      React.createElement("label", null, React.createElement("input", {type: "checkbox", value: "summer"}), "Summer")
-                    ), 
-                    React.createElement("div", {className: "checkbox"}, 
-                      React.createElement("label", null, React.createElement("input", {type: "checkbox", value: "fall"}), "Fall"), 
-                      React.createElement("label", null, React.createElement("input", {type: "checkbox", value: "winter"}), "Winter")
                     )
                 ), 
                 React.createElement("hr", null), 

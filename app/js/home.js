@@ -7,7 +7,6 @@ var DATA = [
     "description": "Arcade games for a nickel! Great for a cheap date.",
     "price": "5.00", 
     "tags": ["cheap", "gaming", "arcade", "nickel", "date"], 
-    "seasons": ["spring", "summer", "fall", "winter"], 
     "address": "1515 S State St, Orem, UT 84097",
     "creator": "alphaMale",
     "upvotes": "45",
@@ -28,7 +27,6 @@ var DATA = [
     "description": "Go to a park and pick targets to make a course.",
     "price": "0.00", 
     "tags": ["free", "outdoors", "frisbee", "golf"], 
-    "seasons": ["spring", "summer", "fall"], 
     "address": "Any Park",
     "creator": "Blue42",
     "upvotes": "3",
@@ -44,7 +42,6 @@ var DATA = [
     "description": "Best cheap dinner option.",
     "price": "5.39",
     "tags": ["dinner", "cheap", "pizza", "party"],
-    "season": ["spring", "summer", "fall", "winter"],
     "address": "434 N 900 EAST, PROVO, UT 84606",
     "creator": "Ceasar",
     "upvotes": "139",
@@ -152,18 +149,6 @@ var Home = React.createClass({
                         ref="priceMax"
                         onChange={this.handlePriceMax}/>
                     </p>
-                </li>
-                <hr/>
-                <li>
-                    <p>Season</p>
-                    <div className="checkbox">
-                      <label><input type="checkbox" value="spring"/>Spring</label>
-                      <label><input type="checkbox" value="summer"/>Summer</label>
-                    </div>
-                    <div className="checkbox">
-                      <label><input type="checkbox" value="fall"/>Fall</label>
-                      <label><input type="checkbox" value="winter"/>Winter</label>
-                    </div>
                 </li>
                 <hr/>
                 <li>

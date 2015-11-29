@@ -82,7 +82,6 @@ app.post('/api/activities', function (req,res) {
 	    	description:activity.description,
 	    	price:activity.price,
 	    	tags:activity.tags,
-	    	seasons:activity.seasons,
 	    	address:activity.address,
 	    	creator:user.id,
 	    	upvotes:0,
