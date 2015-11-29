@@ -6,9 +6,16 @@ var ActivityList = React.createClass({displayName: "ActivityList",
     },
 
     render: function() {
-        this.props.data.sort(function(a,b){
-            return b.upvotes - a.upvotes;
-        })
+
+        if(this.props.sort === "popularity"){
+          this.props.data.sort(function(a,b){
+              return b.upvotes - a.upvotes;
+          })
+        }else if(this.props.sort === "price"){
+          this.props.data.sort(function(a,b){
+              return parseFloat(a.price) - parseFloat(b.price);
+          })
+        }
 
         return (
           React.createElement("div", null, 
@@ -36,7 +43,7 @@ var ActivityList = React.createClass({displayName: "ActivityList",
                     React.createElement("div", null, React.createElement("pDesc", null, item.description)), 
                     React.createElement("div", null, "Price: $", item.price), 
                     React.createElement("div", null, "Address: ", item.address), 
-                    React.createElement("div", null, "Up Votes: ", React.createElement("pVotes", null, item.upvotes)), 
+                    React.createElement("div", null, "Awesome Factor: ", React.createElement("pVotes", null, item.upvotes)), 
                     React.createElement("br", null), 
                     React.createElement("button", {onClick: this.handleClick.bind(this, item), id: "rightAlign"}, "Show Comments"), 
                     React.createElement("br", null)
@@ -154,7 +161,8 @@ var Home = React.createClass({displayName: "Home",
         return {
             keyWords: [],
             priceMin: 0, 
-            priceMax: Infinity
+            priceMax: Infinity,
+            sort: "popularity"
         };
     },
 
@@ -176,15 +184,23 @@ var Home = React.createClass({displayName: "Home",
         })
     },
 
+    handleSort: function(){
+        this.setState({
+            sort: this.refs.sort.value
+        })
+    },
+
     clear: function(){
         this.setState({
             keyWords: [],
             priceMin: 0, 
-            priceMax: Infinity
+            priceMax: Infinity,
+            sort: "popularity"
         })
         this.refs.filterText.value = ""
         this.refs.priceMin.value = ""
         this.refs.priceMax.value = ""
+        this.refs.sort.value = "popularity"
     },
 
   render: function(){
@@ -197,7 +213,17 @@ var Home = React.createClass({displayName: "Home",
                 ), 
                 React.createElement("hr", null), 
                 React.createElement("li", null, 
-                    React.createElement("center", null, React.createElement("button", {onClick: this.clear}, "Clear Filters"))
+                    React.createElement("table", null, React.createElement("tbody", null, React.createElement("tr", null, 
+                    React.createElement("td", null, 
+                    React.createElement("button", {onClick: this.clear}, "Clear Filters")
+                    ), React.createElement("td", null, " "), React.createElement("td", null, 
+                    "Sort by:", 
+                    React.createElement("select", {ref: "sort", onChange: this.handleSort}, 
+                      React.createElement("option", {value: "popularity"}, "Popularity"), 
+                      React.createElement("option", {value: "price"}, "Price")
+                    )
+                    )
+                    )))
                 ), 
                 React.createElement("hr", null), 
                 React.createElement("li", null, 
@@ -267,7 +293,8 @@ var Home = React.createClass({displayName: "Home",
                 data: DATA, 
                 keyWords: this.state.keyWords, 
                 priceMin: this.state.priceMin, 
-                priceMax: this.state.priceMax})
+                priceMax: this.state.priceMax, 
+                sort: this.state.sort})
         )
 
     )

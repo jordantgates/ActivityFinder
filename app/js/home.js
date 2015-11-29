@@ -52,7 +52,8 @@ var Home = React.createClass({
         return {
             keyWords: [],
             priceMin: 0, 
-            priceMax: Infinity
+            priceMax: Infinity,
+            sort: "popularity"
         };
     },
 
@@ -74,15 +75,23 @@ var Home = React.createClass({
         })
     },
 
+    handleSort: function(){
+        this.setState({
+            sort: this.refs.sort.value
+        })
+    },
+
     clear: function(){
         this.setState({
             keyWords: [],
             priceMin: 0, 
-            priceMax: Infinity
+            priceMax: Infinity,
+            sort: "popularity"
         })
         this.refs.filterText.value = ""
         this.refs.priceMin.value = ""
         this.refs.priceMax.value = ""
+        this.refs.sort.value = "popularity"
     },
 
   render: function(){
@@ -95,7 +104,17 @@ var Home = React.createClass({
                 </li>
                 <hr/>
                 <li>
-                    <center><button onClick={this.clear}>Clear Filters</button></center>
+                    <table><tbody><tr>
+                    <td>
+                    <button onClick={this.clear}>Clear Filters</button>
+                    </td><td>&nbsp;</td><td>
+                    Sort by:
+                    <select ref="sort" onChange={this.handleSort}>
+                      <option value="popularity">Popularity</option>
+                      <option value="price">Price</option>
+                    </select>
+                    </td>
+                    </tr></tbody></table>
                 </li>
                 <hr/>
                 <li>
@@ -165,7 +184,8 @@ var Home = React.createClass({
                 data={DATA} 
                 keyWords={this.state.keyWords} 
                 priceMin={this.state.priceMin} 
-                priceMax={this.state.priceMax}/>
+                priceMax={this.state.priceMax}
+                sort={this.state.sort}/>
         </div>
 
     </div>

@@ -5,9 +5,16 @@ var ActivityList = React.createClass({
     },
 
     render: function() {
-        this.props.data.sort(function(a,b){
-            return b.upvotes - a.upvotes;
-        })
+
+        if(this.props.sort === "popularity"){
+          this.props.data.sort(function(a,b){
+              return b.upvotes - a.upvotes;
+          })
+        }else if(this.props.sort === "price"){
+          this.props.data.sort(function(a,b){
+              return parseFloat(a.price) - parseFloat(b.price);
+          })
+        }
 
         return (
           <div>
@@ -35,7 +42,7 @@ var ActivityList = React.createClass({
                     <div><pDesc>{item.description}</pDesc></div>
                     <div>Price: ${item.price}</div>
                     <div>Address: {item.address}</div>
-                    <div>Up Votes: <pVotes>{item.upvotes}</pVotes></div>
+                    <div>Awesome Factor: <pVotes>{item.upvotes}</pVotes></div>
                     <br/>
                     <button onClick={this.handleClick.bind(this, item)}id="rightAlign">Show Comments</button>
                     <br/>
