@@ -14,14 +14,21 @@ var ActivityList = React.createClass({displayName: "ActivityList",
           React.createElement("div", null, 
              this.props.data.map(function(item, i) {
               var display = true;
-              if(this.props.keyWords.length > 0){
-                  display = false;
-                  this.props.keyWords.forEach(function(tag){
-                      if(item.tags.indexOf(tag) != -1){
-                          display = true;
-                      }
-                  });
+
+              if(parseFloat(item.price) >= this.props.priceMin && 
+                parseFloat(item.price) <= this.props.priceMax){
+                  if(this.props.keyWords.length > 0){
+                      display = false;
+                      this.props.keyWords.forEach(function(tag){
+                          if(item.tags.indexOf(tag.toLowerCase()) != -1){
+                              display = true;
+                          }
+                      });
+                  }
+              }else{
+                  display = false
               }
+
               if(display){
                 return (
                   React.createElement("div", {className: "rcorners", key: i}, 
@@ -145,14 +152,39 @@ var DATA = [
 var Home = React.createClass({displayName: "Home",
     getInitialState: function(){
         return {
-            keyWords: []
+            keyWords: [],
+            priceMin: 0, 
+            priceMax: Infinity
         };
     },
 
-    handleChange: function(){
+    handleTextFilter: function(){
         this.setState({
             keyWords: this.refs.filterText.value.split(', ')
         })
+    },
+
+    handlePriceMin: function(){
+        this.setState({
+            priceMin: this.refs.priceMin.value
+        })
+    },
+
+    handlePriceMax: function(){
+        this.setState({
+            priceMax: this.refs.priceMax.value
+        })
+    },
+
+    clear: function(){
+        this.setState({
+            keyWords: [],
+            priceMin: 0, 
+            priceMax: Infinity
+        })
+        this.refs.filterText.value = ""
+        this.refs.priceMin.value = ""
+        this.refs.priceMax.value = ""
     },
 
   render: function(){
@@ -165,9 +197,7 @@ var Home = React.createClass({displayName: "Home",
                 ), 
                 React.createElement("hr", null), 
                 React.createElement("li", null, 
-                    React.createElement("button", {href: "#"}, "Clear Filters"), 
-                    "     ", 
-                    React.createElement("button", {href: "#"}, "Search")
+                    React.createElement("center", null, React.createElement("button", {onClick: this.clear}, "Clear Filters"))
                 ), 
                 React.createElement("hr", null), 
                 React.createElement("li", null, 
@@ -177,15 +207,27 @@ var Home = React.createClass({displayName: "Home",
                         className: "form-control", 
                         placeholder: "e.g. outdoors, date, cheap", 
                         ref: "filterText", 
-                        onChange: this.handleChange})
+                        onChange: this.handleTextFilter})
                 ), 
                 React.createElement("hr", null), 
                 React.createElement("li", null, 
                     React.createElement("p", null, "Price Range"), 
                     React.createElement("p", null, 
-                    "$", React.createElement("input", {type: "text", size: "5", placeholder: "0"}), 
+                    "$", React.createElement("input", {
+                        type: "text", 
+                        size: "5", 
+                        placeholder: "0", 
+                        ref: "priceMin", 
+                        onChange: this.handlePriceMin}), 
+
                      " - " + ' ' + 
-                    "$", React.createElement("input", {type: "text", size: "5", placeholder: "10"})
+
+                    "$", React.createElement("input", {
+                        type: "text", 
+                        size: "5", 
+                        placeholder: "10", 
+                        ref: "priceMax", 
+                        onChange: this.handlePriceMax})
                     )
                 ), 
                 React.createElement("hr", null), 
@@ -221,7 +263,11 @@ var Home = React.createClass({displayName: "Home",
                     )
                 )
             ), 
-            React.createElement(ActivityList, {data: DATA, keyWords: this.state.keyWords})
+            React.createElement(ActivityList, {
+                data: DATA, 
+                keyWords: this.state.keyWords, 
+                priceMin: this.state.priceMin, 
+                priceMax: this.state.priceMax})
         )
 
     )

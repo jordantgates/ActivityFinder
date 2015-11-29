@@ -13,14 +13,21 @@ var ActivityList = React.createClass({
           <div>
             { this.props.data.map(function(item, i) {
               var display = true;
-              if(this.props.keyWords.length > 0){
-                  display = false;
-                  this.props.keyWords.forEach(function(tag){
-                      if(item.tags.indexOf(tag) != -1){
-                          display = true;
-                      }
-                  });
+
+              if(parseFloat(item.price) >= this.props.priceMin && 
+                parseFloat(item.price) <= this.props.priceMax){
+                  if(this.props.keyWords.length > 0){
+                      display = false;
+                      this.props.keyWords.forEach(function(tag){
+                          if(item.tags.indexOf(tag.toLowerCase()) != -1){
+                              display = true;
+                          }
+                      });
+                  }
+              }else{
+                  display = false
               }
+
               if(display){
                 return (
                   <div className="rcorners" key={i}>

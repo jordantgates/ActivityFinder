@@ -50,14 +50,39 @@ var DATA = [
 var Home = React.createClass({
     getInitialState: function(){
         return {
-            keyWords: []
+            keyWords: [],
+            priceMin: 0, 
+            priceMax: Infinity
         };
     },
 
-    handleChange: function(){
+    handleTextFilter: function(){
         this.setState({
             keyWords: this.refs.filterText.value.split(', ')
         })
+    },
+
+    handlePriceMin: function(){
+        this.setState({
+            priceMin: this.refs.priceMin.value
+        })
+    },
+
+    handlePriceMax: function(){
+        this.setState({
+            priceMax: this.refs.priceMax.value
+        })
+    },
+
+    clear: function(){
+        this.setState({
+            keyWords: [],
+            priceMin: 0, 
+            priceMax: Infinity
+        })
+        this.refs.filterText.value = ""
+        this.refs.priceMin.value = ""
+        this.refs.priceMax.value = ""
     },
 
   render: function(){
@@ -70,9 +95,7 @@ var Home = React.createClass({
                 </li>
                 <hr/>
                 <li>
-                    <button href="#">Clear Filters</button>
-                    &nbsp; &nbsp; &nbsp;
-                    <button href="#">Search</button>
+                    <center><button onClick={this.clear}>Clear Filters</button></center>
                 </li>
                 <hr/>
                 <li>
@@ -82,15 +105,27 @@ var Home = React.createClass({
                         className="form-control" 
                         placeholder="e.g. outdoors, date, cheap" 
                         ref="filterText"
-                        onChange={this.handleChange}/>
+                        onChange={this.handleTextFilter}/>
                 </li>
                 <hr/>
                 <li>
                     <p>Price Range</p>
                     <p>
-                    $<input type="text" size="5" placeholder="0" />
+                    $<input 
+                        type="text" 
+                        size="5" 
+                        placeholder="0" 
+                        ref="priceMin"
+                        onChange={this.handlePriceMin}/>
+
                      &nbsp;-&nbsp; 
-                    $<input type="text" size="5" placeholder="10" />
+
+                    $<input 
+                        type="text" 
+                        size="5" 
+                        placeholder="10" 
+                        ref="priceMax"
+                        onChange={this.handlePriceMax}/>
                     </p>
                 </li>
                 <hr/>
@@ -126,7 +161,11 @@ var Home = React.createClass({
                     </div>
                 </div>
             </div>
-            <ActivityList data={DATA} keyWords={this.state.keyWords} />
+            <ActivityList 
+                data={DATA} 
+                keyWords={this.state.keyWords} 
+                priceMin={this.state.priceMin} 
+                priceMax={this.state.priceMax}/>
         </div>
 
     </div>
