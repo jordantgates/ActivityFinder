@@ -1,7 +1,27 @@
 
 var ActivityList = React.createClass({
-    handleClick: function(i){
-      return console.log(i.comments);
+
+    handleComments: function(i){
+      var allComments = ""
+        i.comments.forEach(function(comment){
+          allComments += comment.comment
+          allComments += '\n'
+          allComments += '    -'
+          allComments += comment.user
+          allComments += '\n\n'
+        });
+      if(allComments === ""){
+        allComments = "no comments yet for this activity"
+      }
+      alert(allComments);
+    },
+
+    handleComment: function(){
+
+    },
+
+    handleLike: function(){
+
     },
 
     render: function() {
@@ -44,7 +64,9 @@ var ActivityList = React.createClass({
                     <div>Address: {item.address}</div>
                     <div>Awesome Factor: <pVotes>{item.upvotes}</pVotes></div>
                     <br/>
-                    <button onClick={this.handleClick.bind(this, item)}id="rightAlign">Show Comments</button>
+                    <button onClick={this.handleVote}>Like</button>
+                    <button onClick={this.handleComment}>Comment</button>
+                    <button onClick={this.handleComments.bind(this, item)}id="rightAlign">Show Comments</button>
                     <br/>
                   </div>
                 );

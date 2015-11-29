@@ -122,7 +122,7 @@ var Home = React.createClass({
                     <input 
                         type="text" 
                         className="form-control" 
-                        placeholder="e.g. outdoors, date, cheap" 
+                        placeholder="e.g. outdoors, date, cheap, winter" 
                         ref="filterText"
                         onChange={this.handleTextFilter}/>
                 </li>
@@ -151,12 +151,12 @@ var Home = React.createClass({
                 <li>
                     <p>Season</p>
                     <div className="checkbox">
-                      <label><input type="checkbox" value=""/>Spring</label>
-                      <label><input type="checkbox" value=""/>Summer</label>
+                      <label><input type="checkbox" value="spring"/>Spring</label>
+                      <label><input type="checkbox" value="summer"/>Summer</label>
                     </div>
                     <div className="checkbox">
-                      <label><input type="checkbox" value=""/>Fall</label>
-                      <label><input type="checkbox" value=""/>Winter</label>
+                      <label><input type="checkbox" value="fall"/>Fall</label>
+                      <label><input type="checkbox" value="winter"/>Winter</label>
                     </div>
                 </li>
                 <hr/>

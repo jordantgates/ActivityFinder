@@ -1,8 +1,28 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
 var ActivityList = React.createClass({displayName: "ActivityList",
-    handleClick: function(i){
-      return console.log(i.comments);
+
+    handleComments: function(i){
+      var allComments = ""
+        i.comments.forEach(function(comment){
+          allComments += comment.comment
+          allComments += '\n'
+          allComments += '    -'
+          allComments += comment.user
+          allComments += '\n\n'
+        });
+      if(allComments === ""){
+        allComments = "no comments yet for this activity"
+      }
+      alert(allComments);
+    },
+
+    handleComment: function(){
+
+    },
+
+    handleLike: function(){
+
     },
 
     render: function() {
@@ -45,7 +65,9 @@ var ActivityList = React.createClass({displayName: "ActivityList",
                     React.createElement("div", null, "Address: ", item.address), 
                     React.createElement("div", null, "Awesome Factor: ", React.createElement("pVotes", null, item.upvotes)), 
                     React.createElement("br", null), 
-                    React.createElement("button", {onClick: this.handleClick.bind(this, item), id: "rightAlign"}, "Show Comments"), 
+                    React.createElement("button", {onClick: this.handleVote}, "Like"), 
+                    React.createElement("button", {onClick: this.handleComment}, "Comment"), 
+                    React.createElement("button", {onClick: this.handleComments.bind(this, item), id: "rightAlign"}, "Show Comments"), 
                     React.createElement("br", null)
                   )
                 );
@@ -231,7 +253,7 @@ var Home = React.createClass({displayName: "Home",
                     React.createElement("input", {
                         type: "text", 
                         className: "form-control", 
-                        placeholder: "e.g. outdoors, date, cheap", 
+                        placeholder: "e.g. outdoors, date, cheap, winter", 
                         ref: "filterText", 
                         onChange: this.handleTextFilter})
                 ), 
@@ -260,12 +282,12 @@ var Home = React.createClass({displayName: "Home",
                 React.createElement("li", null, 
                     React.createElement("p", null, "Season"), 
                     React.createElement("div", {className: "checkbox"}, 
-                      React.createElement("label", null, React.createElement("input", {type: "checkbox", value: ""}), "Spring"), 
-                      React.createElement("label", null, React.createElement("input", {type: "checkbox", value: ""}), "Summer")
+                      React.createElement("label", null, React.createElement("input", {type: "checkbox", value: "spring"}), "Spring"), 
+                      React.createElement("label", null, React.createElement("input", {type: "checkbox", value: "summer"}), "Summer")
                     ), 
                     React.createElement("div", {className: "checkbox"}, 
-                      React.createElement("label", null, React.createElement("input", {type: "checkbox", value: ""}), "Fall"), 
-                      React.createElement("label", null, React.createElement("input", {type: "checkbox", value: ""}), "Winter")
+                      React.createElement("label", null, React.createElement("input", {type: "checkbox", value: "fall"}), "Fall"), 
+                      React.createElement("label", null, React.createElement("input", {type: "checkbox", value: "winter"}), "Winter")
                     )
                 ), 
                 React.createElement("hr", null), 
