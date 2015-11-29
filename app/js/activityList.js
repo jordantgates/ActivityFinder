@@ -1,19 +1,10 @@
+var Comments = require("./comments.js");
 
 var ActivityList = React.createClass({
 
     handleComments: function(i){
-      var allComments = ""
-        i.comments.forEach(function(comment){
-          allComments += comment.comment
-          allComments += '\n'
-          allComments += '    -'
-          allComments += comment.user
-          allComments += '\n\n'
-        });
-      if(allComments === ""){
-        allComments = "no comments yet for this activity"
-      }
-      alert(allComments);
+      i.showComments = !i.showComments;
+      this.forceUpdate();
     },
 
     handleComment: function(){
@@ -57,7 +48,7 @@ var ActivityList = React.createClass({
 
               if(display){
                 return (
-                  <div className="rcorners" key={i}>
+                  <div className="rcorners-green" key={i}>
                     <div><pTitle>{item.title}</pTitle></div>
                     <div><pDesc>{item.description}</pDesc></div>
                     <div>Price: ${item.price}</div>
@@ -66,7 +57,8 @@ var ActivityList = React.createClass({
                     <br/>
                     <button onClick={this.handleVote}>Like</button>
                     <button onClick={this.handleComment}>Comment</button>
-                    <button onClick={this.handleComments.bind(this, item)}id="rightAlign">Show Comments</button>
+                    <button onClick={this.handleComments.bind(this, item)} id="rightAlign" >Show/Hide Comments</button>
+                    <Comments activity={item}/>
                     <br/>
                   </div>
                 );

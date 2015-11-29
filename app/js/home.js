@@ -11,6 +11,7 @@ var DATA = [
     "address": "1515 S State St, Orem, UT 84097",
     "creator": "alphaMale",
     "upvotes": "45",
+    "showComments": false,
     "comments" : [
       {
         "user": "Blue42",
@@ -31,7 +32,12 @@ var DATA = [
     "address": "Any Park",
     "creator": "Blue42",
     "upvotes": "3",
-    "comments": []
+    "comments": [
+        {
+            "user": "tester",
+            "comment": "This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment."
+        }
+    ]
   },
   {
     "title": "Little Ceasars",

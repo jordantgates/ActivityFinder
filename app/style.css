@@ -29,10 +29,16 @@ pDesc {
     float: right;
 }
 
-.rcorners {
+.rcorners-green {
     border-radius: 25px;
     border: 2px solid #73AD21;
     padding: 20px; 
+}
+
+.rcorners-blue {
+    border-radius: 25px;
+    border: 2px solid #003366;
+    padding: 10px; 
 }
 
 hr { 

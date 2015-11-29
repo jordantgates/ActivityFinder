@@ -1,20 +1,11 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var Comments = require("./comments.js");
 
 var ActivityList = React.createClass({displayName: "ActivityList",
 
     handleComments: function(i){
-      var allComments = ""
-        i.comments.forEach(function(comment){
-          allComments += comment.comment
-          allComments += '\n'
-          allComments += '    -'
-          allComments += comment.user
-          allComments += '\n\n'
-        });
-      if(allComments === ""){
-        allComments = "no comments yet for this activity"
-      }
-      alert(allComments);
+      i.showComments = !i.showComments;
+      this.forceUpdate();
     },
 
     handleComment: function(){
@@ -58,7 +49,7 @@ var ActivityList = React.createClass({displayName: "ActivityList",
 
               if(display){
                 return (
-                  React.createElement("div", {className: "rcorners", key: i}, 
+                  React.createElement("div", {className: "rcorners-green", key: i}, 
                     React.createElement("div", null, React.createElement("pTitle", null, item.title)), 
                     React.createElement("div", null, React.createElement("pDesc", null, item.description)), 
                     React.createElement("div", null, "Price: $", item.price), 
@@ -67,7 +58,8 @@ var ActivityList = React.createClass({displayName: "ActivityList",
                     React.createElement("br", null), 
                     React.createElement("button", {onClick: this.handleVote}, "Like"), 
                     React.createElement("button", {onClick: this.handleComment}, "Comment"), 
-                    React.createElement("button", {onClick: this.handleComments.bind(this, item), id: "rightAlign"}, "Show Comments"), 
+                    React.createElement("button", {onClick: this.handleComments.bind(this, item), id: "rightAlign"}, "Show/Hide Comments"), 
+                    React.createElement(Comments, {activity: item}), 
                     React.createElement("br", null)
                   )
                 );
@@ -81,7 +73,7 @@ var ActivityList = React.createClass({displayName: "ActivityList",
 
 module.exports = ActivityList;
 
-},{}],2:[function(require,module,exports){
+},{"./comments.js":3}],2:[function(require,module,exports){
 var Home = require("./home.js");
 
 var Router = ReactRouter.Router;
@@ -128,7 +120,37 @@ ReactDOM.render(routes, document.getElementById('children'));
 
 module.exports = App;
 
-},{"./home.js":3}],3:[function(require,module,exports){
+},{"./home.js":4}],3:[function(require,module,exports){
+
+var Comments = React.createClass({displayName: "Comments",
+	render: function() {
+		if(this.props.activity.showComments){
+			if(this.props.activity.comments.length > 0){
+				return (
+					React.createElement("div", null, React.createElement("br", null), 
+						this.props.activity.comments.map(function(comment, i){
+								return (
+									React.createElement("div", {className: "rcorners-blue", key: i}, 
+										comment.comment, 
+										React.createElement("br", null), 
+										React.createElement("div", null, " ", React.createElement("div", {id: "rightAlign"}, "~", comment.user))
+									)
+								);
+						})
+					)
+				);
+			}else{
+				return React.createElement("div", null, "No comments yet on this activity.")
+			}
+		}else{
+			return React.createElement("div", null);
+		}
+	}
+})
+
+module.exports = Comments;
+
+},{}],4:[function(require,module,exports){
 var ActivityList = require("./activityList.js");
 
 
@@ -142,6 +164,7 @@ var DATA = [
     "address": "1515 S State St, Orem, UT 84097",
     "creator": "alphaMale",
     "upvotes": "45",
+    "showComments": false,
     "comments" : [
       {
         "user": "Blue42",
@@ -162,7 +185,12 @@ var DATA = [
     "address": "Any Park",
     "creator": "Blue42",
     "upvotes": "3",
-    "comments": []
+    "comments": [
+        {
+            "user": "tester",
+            "comment": "This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment."
+        }
+    ]
   },
   {
     "title": "Little Ceasars",
