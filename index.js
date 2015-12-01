@@ -5,7 +5,8 @@ var home = require('./models/express.js');
 
 //setup mongoose
 var mongoose = require('mongoose');
-var db = mongoose.connect('mongodb://localhost/activities');
+//var db = mongoose.connect('mongodb://localhost/activities');
+var db = mongoose.connect('mongodb://ds031972.mongolab.com:31972/activityfinder');
 
 //models
 var api = require('./models/api.js');

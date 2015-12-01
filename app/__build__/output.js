@@ -197,7 +197,7 @@ var DATA = [
     "tags": ["dinner", "cheap", "pizza", "party"],
     "address": "434 N 900 EAST, PROVO, UT 84606",
     "creator": "Ceasar",
-    "upvotes": "139",
+    "upvotes": "1",
     "comments": []
   }
 ];
