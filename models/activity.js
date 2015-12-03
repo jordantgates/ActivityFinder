@@ -8,12 +8,13 @@ var User = require('./user.js');
 
 // Activity schema
 var activitySchema = new Schema({
+	_id: String,
 	title: String,
 	description: String,
 	price: String,
 	tags: [String],
 	address: String,
-	creator: {type: ObjectId, ref: 'users'},
+	creator: String,//{type: ObjectId, ref: 'users'},
 	upvotes: String,
 	comments: [{user: String, comment: String}],
 });

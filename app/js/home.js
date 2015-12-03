@@ -2,64 +2,27 @@ var ActivityList = require("./activityList.js");
 var api = require("./api.js");
 
 
-var DATA = [
-  {
-    "title": "Nickel City", 
-    "description": "Arcade games for a nickel! Great for a cheap date.",
-    "price": "5.00", 
-    "tags": ["cheap", "gaming", "arcade", "nickel", "date"], 
-    "address": "1515 S State St, Orem, UT 84097",
-    "creator": "alphaMale",
-    "upvotes": "45",
-    "showComments": false,
-    "comments" : [
-      {
-        "user": "Blue42",
-        "comment": "Great Place! Had tons of fun here."
-      },
-      {
-        "user": "Red5",
-        "comment": "Some of the machines were broken. Overall great place."
-      }
-    ]
-  },
-  {
-    "title": "Frisbee Golf", 
-    "description": "Go to a park and pick targets to make a course.",
-    "price": "0.00", 
-    "tags": ["free", "outdoors", "frisbee", "golf"], 
-    "address": "Any Park",
-    "creator": "Blue42",
-    "upvotes": "3",
-    "comments": [
-        {
-            "user": "tester",
-            "comment": "This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment."
-        }
-    ]
-  },
-  {
-    "title": "Little Ceasars",
-    "description": "Best cheap dinner option.",
-    "price": "5.39",
-    "tags": ["dinner", "cheap", "pizza", "party"],
-    "address": "434 N 900 EAST, PROVO, UT 84606",
-    "creator": "Ceasar",
-    "upvotes": "139",
-    "comments": []
-  }
-];
+var DATA = [];
 
 
 var Home = React.createClass({
     getInitialState: function(){
-        //console.log(api.getItems());
+        api.getItems(this.setActivities)
         return {
             keyWords: [],
             priceMin: 0, 
             priceMax: Infinity,
-            sort: "popularity"
+            sort: "popularity",
+            activities: DATA
         };
+    },
+
+    setActivities: function(status, items){
+        if(status){
+            this.setState({
+                activities: items.activities
+            })
+        }
     },
 
     handleTextFilter: function(){
@@ -174,7 +137,7 @@ var Home = React.createClass({
                 </div>
             </div>
             <ActivityList 
-                data={DATA}
+                data={this.state.activities}
                 keyWords={this.state.keyWords} 
                 priceMin={this.state.priceMin} 
                 priceMax={this.state.priceMax}

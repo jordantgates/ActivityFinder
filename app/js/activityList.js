@@ -16,7 +16,7 @@ var ActivityList = React.createClass({
     },
 
     render: function() {
-
+        console.log(this.props.data)
         if(this.props.sort === "popularity"){
           this.props.data.sort(function(a,b){
               return b.upvotes - a.upvotes;

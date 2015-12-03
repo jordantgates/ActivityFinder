@@ -1,10 +1,9 @@
-[
+
   {
     "title": "Nickel City", 
     "description": "Arcade games for a nickel! Great for a cheap date.",
     "price": "5.00", 
-    "tags": "cheap, gaming, arcade, nickel, date", 
-    "seasons": "spring, summer, fall, winter", 
+    "tags": ["cheap", "gaming", "arcade", "nickel", "date"], 
     "address": "1515 S State St, Orem, UT 84097",
     "creator": "alphaMale",
     "upvotes": "45",
@@ -23,11 +22,24 @@
     "title": "Frisbee Golf", 
     "description": "Go to a park and pick targets to make a course.",
     "price": "0.00", 
-    "tags": "free, outdoors, frisbee, golf", 
-    "seasons": "spring, summer, fall", 
+    "tags": ["free", "outdoors", "frisbee", "golf"], 
     "address": "Any Park",
     "creator": "Blue42",
     "upvotes": "3",
+    "comments": [
+        {
+            "user": "tester",
+            "comment": "This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment."
+        }
+    ]
+  },
+  {
+    "title": "Little Ceasars",
+    "description": "Best cheap dinner option.",
+    "price": "5.39",
+    "tags": ["dinner", "cheap", "pizza", "party"],
+    "address": "434 N 900 EAST, PROVO, UT 84606",
+    "creator": "Ceasar",
+    "upvotes": "139",
     "comments": []
   }
-]

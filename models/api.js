@@ -58,7 +58,7 @@ app.post('/api/users/login', function (req, res) {
     });
 });
 
-// get all activities sorted by upvotes
+// get all activities
 app.get('/api/activities', function (req,res) {
     Activity.find({}, function(err, activities) {
 		if (err) {
