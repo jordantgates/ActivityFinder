@@ -1,4 +1,5 @@
 var Home = require("./home.js");
+var CreateActivity = require("./createactivity.js");
 
 var Router = ReactRouter.Router;
 var Link = ReactRouter.Link;
@@ -15,7 +16,7 @@ var App = React.createClass({
                 <li className="active"><a href="#">Home</a></li>
             </ul>
             <ul className="nav navbar-nav navbar-center">
-                <li><a href="#/submit">Submit an Activity Idea</a></li>
+                <li><a href="#/createactivity">Submit an Activity Idea</a></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
                 <li><a href="#/login">Login</a></li>
@@ -34,8 +35,10 @@ var App = React.createClass({
 
 var routes = (
   <Router>
+    <Route name="createactivity" path="/createactivity" component={CreateActivity} />
     <Route name="home" path="/" component={Home}/>
     <Route path="*" component={Home} />
+    
   </Router>
 );
 
