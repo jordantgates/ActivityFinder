@@ -14,7 +14,7 @@ var App = React.createClass({
       <nav className="navbar navbar-default navbar-fixed-top">
         <div className="container">
             <ul className="nav navbar-nav">
-                <li className="active"><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
             </ul>
             <ul className="nav navbar-nav navbar-center">
                 <li><a href="#/createactivity">Submit an Activity Idea</a></li>
