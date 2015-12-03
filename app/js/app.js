@@ -1,5 +1,6 @@
 var Home = require("./home.js");
 var CreateActivity = require("./createactivity.js");
+var Login = require("./login.js");
 
 var Router = ReactRouter.Router;
 var Link = ReactRouter.Link;
@@ -37,6 +38,7 @@ var routes = (
   <Router>
     <Route name="createactivity" path="/createactivity" component={CreateActivity} />
     <Route name="home" path="/" component={Home}/>
+    <Route name="login" path="/" component={Login}/>
     <Route path="*" component={Home} />
     
   </Router>
