@@ -197,7 +197,7 @@ var DATA = [
     "tags": ["dinner", "cheap", "pizza", "party"],
     "address": "434 N 900 EAST, PROVO, UT 84606",
     "creator": "Ceasar",
-    "upvotes": "1",
+    "upvotes": "139",
     "comments": []
   }
 ];
@@ -205,6 +205,7 @@ var DATA = [
 
 var Home = React.createClass({displayName: "Home",
     getInitialState: function(){
+        console.log(api.getItems());
         return {
             keyWords: [],
             priceMin: 0, 
@@ -340,7 +341,7 @@ var Home = React.createClass({displayName: "Home",
 
 // API object
 var api = {
-    // get the list of activities (sorted), call the callback when complete
+    // get the list of activities, call the callback when complete
     getItems: function(cb) {
         var url = "/api/activities";
         $.ajax({

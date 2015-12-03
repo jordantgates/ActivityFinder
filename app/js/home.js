@@ -52,6 +52,7 @@ var DATA = [
 
 var Home = React.createClass({
     getInitialState: function(){
+        console.log(api.getItems());
         return {
             keyWords: [],
             priceMin: 0, 
@@ -172,7 +173,7 @@ var Home = React.createClass({
                 </div>
             </div>
             <ActivityList 
-                data={DATA} 
+                data={DATA}
                 keyWords={this.state.keyWords} 
                 priceMin={this.state.priceMin} 
                 priceMax={this.state.priceMax}
@@ -187,7 +188,7 @@ var Home = React.createClass({
 
 // API object
 var api = {
-    // get the list of activities (sorted), call the callback when complete
+    // get the list of activities, call the callback when complete
     getItems: function(cb) {
         var url = "/api/activities";
         $.ajax({
