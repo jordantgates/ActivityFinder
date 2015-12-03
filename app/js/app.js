@@ -38,7 +38,7 @@ var routes = (
   <Router>
     <Route name="createactivity" path="/createactivity" component={CreateActivity} />
     <Route name="home" path="/" component={Home}/>
-    <Route name="login" path="/" component={Login}/>
+    <Route name="login" path="/login" component={Login}/>
     <Route path="*" component={Home} />
     
   </Router>
