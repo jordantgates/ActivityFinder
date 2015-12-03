@@ -53,7 +53,7 @@ var DATA = [
 
 var Home = React.createClass({
     getInitialState: function(){
-        console.log(api.getItems());
+        //console.log(api.getItems());
         return {
             keyWords: [],
             priceMin: 0, 

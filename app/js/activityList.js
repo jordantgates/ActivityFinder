@@ -55,6 +55,8 @@ var ActivityList = React.createClass({
                     <div>Address: {item.address}</div>
                     <div>Awesome Factor: <pVotes>{item.upvotes}</pVotes></div>
                     <br/>
+                    <input type="text" ref="comment" />
+                    <br/>
                     <button onClick={this.handleVote}>Like</button>
                     <button onClick={this.handleComment}>Comment</button>
                     <button onClick={this.handleComments.bind(this, item)} id="rightAlign" >Show/Hide Comments</button>
