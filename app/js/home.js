@@ -1,5 +1,5 @@
 var ActivityList = require("./activityList.js");
-var api = require(".api.js");
+var api = require("./api.js");
 
 
 var DATA = [
