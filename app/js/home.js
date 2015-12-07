@@ -27,7 +27,7 @@ var Home = React.createClass({
 
     handleTextFilter: function(){
         this.setState({
-            keyWords: this.refs.filterText.value.split(', ')
+            keyWords: this.refs.filterText.value.split(/[ ,]+/).filter(Boolean)
         })
     },
 
