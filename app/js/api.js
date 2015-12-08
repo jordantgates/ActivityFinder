@@ -45,7 +45,32 @@ var api = {
                     cb(false, status);
             }
         });
+    },
+
+    // update an item, call the callback when complete
+    updateActivity: function(activity, cb) {
+    var url = "/api/activities/" + activity._id;
+    $.ajax({
+      url: url,
+      contentType: 'application/json',
+      data: JSON.stringify({
+        activity: activity
+      }),
+      type: 'PUT',
+      //headers: {'Authorization': localStorage.token},
+      success: function(res) {
+        if (cb)
+          cb(true, res);
+      },
+      error: function(xhr, status, err) {
+        // if there is any error, remove any login token
+        delete localStorage.token;
+        if (cb)
+          cb(false, status);
+      }
+    });
     }
+
 };
 
 module.exports = api;
