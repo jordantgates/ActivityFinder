@@ -68,49 +68,44 @@ var CreateActivity = React.createClass({
     <div id="wrapper">
         <div id="page-content-wrapper">
             <div className="container-fluid">
-                <div className="row">
-                    <div id="none" className="col-lg-12">
-                        <h1>Create an Activity</h1>
-                        <p>Use the filters on the left to find the perfect activity! Or, browse some of our top rated activities:</p>
-                        <br/><br/>
+                <div className="panel panel-primary">
+                    <div className="panel-heading">
+                        <h3>Create an Activity</h3>
+                    </div>
+                    <div className="panel-body">
+                        <form onSubmit={this.createActivity}>
+                            <div className="input-group">
+  								<span className="input-group-addon" id="Title-addon">Title</span>
+                                <input type="text" className="form-control" id="ActivityTitle" placeholder="Activity Title" ref="title"/>
+                            </div>
+                            <br/>
+                            <div className="input-group">
+  								<span className="input-group-addon" id="Activity-addon">Description</span>
+                                <input type="text" className="form-control" id="ActivityDescription" placeholder="Activity Description" ref="description"/>
+                            </div>
+                            <br/>
+                            <div className="input-group">
+  								<span className="input-group-addon" id="Tags-addon">Tags</span>
+                                <input type="text" className="form-control" id="ActivityTags" placeholder="Activity Tags" ref="tags"/>
+                            </div>
+                            <br/>
+                            <div className="input-group">
+                                <span className="input-group-addon" id="Price-addon">Price</span>
+                                <span className="input-group-addon" id="Price-addon"><span className="glyphicon glyphicon-usd" aria-hidden="true"></span></span>
+                                <input type="number" className="form-control" id="ActivityCost" ref="cost"/>
+                            </div>
+                            <br/>
+                            <div className="input-group">
+  								<span className="input-group-addon" id="Address-addon">Address</span>
+                                <input type="text" className="form-control" id="ActivityAddress" placeholder="Activity Adress" ref="address"/>
+                            </div>
+                            <br/>
+                            <button type="submit" className="btn btn-primary">Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
-        {this.state.error ? (
-             <div className="alert">Something went wrong.</div>
-           ) : null}
-            <div className="panel panel-primary">
-                <div className="panel-heading">
-                </div>
-                <div className="panel=body">
-                     <form onSubmit={this.createActivity}>
-                        <div className="form-group">
-                            <label htmlFor="ActivityTitle">Title</label>
-                            <input type="text" className="form-control" id="ActivityTitle" placeholder="Activity Title" ref="title"/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="ActivityDescription">Description</label>
-                            <input type="text" className="form-control" id="ActivityDescription" placeholder="Activity Description" ref="description"/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="ActivityTags">Tags</label>
-                            <input type="text" className="form-control" id="ActivityTags" placeholder="Activity Tags" ref="tags"/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="ActivityCost">Price</label>
-                            <span>$<input type="number" className="form-control" id="ActivityCost" ref="cost"/></span>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="ActivityAddress">Address</label>
-                            <input type="text" className="form-control" id="ActivityAddress" placeholder="Activity Adress" ref="address"/>
-                        </div>
-                        
-                        <button type="submit" className="btn btn-default">Submit</button>
-                    </form>
-                </div>
-            </div>
-       
+       </div>
     </div>
 
       );
