@@ -97,3 +97,42 @@ app.post('/api/activities', function (req,res) {
         }
     });
 });
+
+// update an activity
+app.put('/api/activities/:_id', function (req,res) {
+  // validate the supplied token
+  //user = User.verifyToken(req.headers.authorization, function(user) {
+    if (true){//user) {
+      // if the token is valid, then find the requested activity
+      console.log(req.params._id);
+      Activity.findById(req.params._id, function(err,activity) {
+    if (err) {
+      res.sendStatus(403);
+      return;
+    }
+    // update the item if it belongs to the user, otherwise return an error
+    // if (item.user != user.id) {
+    //   res.sendStatus(403);
+    //   return;
+    // }
+    console.log(activity);
+    activity.upvotes = req.body.activity.upvotes;
+    activity.comments = req.body.activity.comments;
+    //OTHER THINGS
+    activity.save(function(err) {
+      if (err) {
+        console.log(err);
+        console.log("1");
+        res.sendStatus(403);
+        return;
+      }
+          // return value is the item as JSON
+          res.json({activity:activity});
+        });
+      });
+    } else {
+        console.log("2");
+      res.sendStatus(403);
+    }
+  //}); //end verifyToken
+});

@@ -1,19 +1,23 @@
-var Comments = require("./comments.js");
+var Activity = require("./activity.js");
+var api = require("./api.js");
 
 var ActivityList = React.createClass({
 
-    handleComments: function(i){
-      i.showComments = !i.showComments;
-      this.forceUpdate();
-    },
+    // handleComments: function(i){
+    //   i.showComments = !i.showComments;
+    //   this.forceUpdate();
+    // },
 
-    handleComment: function(){
+    // handleComment: function(i, item){
+    //   //alert(this.refs.{i}.value);
+    //   //api.addComment(i);
+    //   //this.forceUpdate();
+    // },
 
-    },
-
-    handleLike: function(){
-
-    },
+    // handleLike: function(i){
+    //   api.addLike(i);
+    //   this.forceUpdate();
+    // },
 
     render: function() {
         if(this.props.sort === "popularity"){
@@ -57,21 +61,7 @@ var ActivityList = React.createClass({
                 if(display){
                   empty = false
                   return (
-                    <div className="rcorners-green" key={i}>
-                      <div><pTitle>{item.title}</pTitle></div>
-                      <div><pDesc>{item.description}</pDesc></div>
-                      <div>Price: ${item.price}</div>
-                      <div>Address: {item.address}</div>
-                      <div>Awesome Factor: <pVotes>{item.upvotes}</pVotes></div>
-                      <br/>
-                      <input type="text" className="form-control" placeholder="write a comment..." ref="comment" />
-                      <br/>
-                      <button onClick={this.handleVote}>Like</button>
-                      <button onClick={this.handleComment}>Comment</button>
-                      <button onClick={this.handleComments.bind(this, item)} id="rightAlign" >Show/Hide Comments</button>
-                      <Comments activity={item}/>
-                      <br/>
-                    </div>
+                    <Activity item={item} key={i}/>
                   );
                 }
               }, this)
