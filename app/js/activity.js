@@ -12,13 +12,17 @@ var Activity = React.createClass({
 		//alert(this.refs.comment.value);
 		this.props.item.comments.push({"user":"jared", "comment":this.refs.comment.value});
 		api.updateActivity(this.props.item, function(){
-			console.log("the callback is back.");
+			//do nothing
 		});
-		//this.refs.comment.value = "";
+		this.forceUpdate();
 	},
 
 	handleLike: function(){
-
+		this.props.item.upvotes++;
+		api.updateActivity(this.props.item, function(){
+			//do nothing
+		})
+		this.forceUpdate();
 	},
 
 	handleComments: function(){
@@ -28,22 +32,39 @@ var Activity = React.createClass({
 
 	render: function(){
 		return (
-	        <div className="rcorners-green" key={this.props.key}>
-	          <div><pTitle>{this.props.item.title}</pTitle></div>
-	          <div><pDesc>{this.props.item.description}</pDesc></div>
-	          <div>Price: ${this.props.item.price}</div>
-	          <div>Address: {this.props.item.address}</div>
-	          <div>Awesome Factor: <pVotes>{this.props.item.upvotes}</pVotes></div>
-	          <br/>
-	          <form onSubmit={this.handleComment}>
-	          <input type="text" className="form-control" placeholder="write a comment..." ref="comment"/>
-	          <input type="submit" value="Submit"/>
-	          </form>
-	          <br/>
-	          <button onClick={this.handleLike}>Like</button>
-	          <button onClick={this.handleComments} id="rightAlign" >Show/Hide Comments</button>
-	          <Comments activity={this.props.item}/>
-	          <br/>
+	        <div className="panel panel-primary" key={this.props.key}>
+	        	<div className="panel-heading">
+	        		<h1 className="panel-title">{this.props.item.title} </h1>
+	        	</div>
+	        	<div className="panel-body">
+					<div><pDesc>{this.props.item.description}</pDesc></div>
+					<div>Price: ${this.props.item.price}</div>
+					<div>Address: {this.props.item.address}</div>
+					<div>Awesome Factor: <pVotes>{this.props.item.upvotes}</pVotes></div>
+					<div className="">Tags: &nbsp;
+					{
+						this.props.item.tags.map(function(tag, i) {
+							return (
+								<span key={i}><span className="label label-info">{tag}</span> </span>
+							);
+						})
+					}
+					</div>
+					<br/>
+					<form onSubmit={this.handleComment}>
+					<div className="input-group">
+						<input aria-describedby="basic-addon2" type="text" className="form-control" placeholder="write a comment..." ref="comment"/>
+						<span className="input-group-btn" id="basic-addon2">
+							<button className="btn btn-primary" type="submit">Submit Comment</button>
+						</span>
+					</div>
+					</form>
+					<br/>
+					<button className="btn btn-primary" onClick={this.handleLike}>Like</button>
+					<button className="btn btn-primary"onClick={this.handleComments} id="rightAlign" >Show/Hide Comments</button>
+					<Comments activity={this.props.item}/>
+					<br/>
+				</div>
 	        </div>
 		)
 	}

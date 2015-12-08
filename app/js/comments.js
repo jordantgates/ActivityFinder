@@ -7,10 +7,13 @@ var Comments = React.createClass({
 					<div><br/>{
 						this.props.activity.comments.map(function(comment, i){
 								return (
-									<div className="rcorners-blue" key={i}>
+									<div className="panel panel-success" key={i}>
+										<div className="panel-heading">
+											<h1 className="panel-title">{comment.user} </h1>
+										</div>
+										<div className="panel-body">
 										{comment.comment}
-										<br/>
-										<div>&nbsp;<div id="rightAlign">~{comment.user}</div></div>
+										</div>
 									</div>
 								);
 						})

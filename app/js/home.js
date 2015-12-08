@@ -116,6 +116,7 @@ var Home = React.createClass({
                     </p>
                 </li>
                 <hr/>
+                {/*
                 <li>
                     <p>Distance</p>
                     <p>
@@ -123,6 +124,7 @@ var Home = React.createClass({
                     &nbsp;miles
                     </p>
                 </li>
+                */}
             </ul>
         </div>
 
