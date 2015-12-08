@@ -74,26 +74,27 @@ app.get('/api/activities', function (req,res) {
 app.post('/api/activities', function (req,res) {
     // validate the supplied token
     // get indexes
-    user = User.verifyToken(req.headers.authorization, function(user) {
-        if (user) {
+    // user = User.verifyToken(req.headers.authorization, function(user) {
+    //     if (user) {
             // if the token is valid, create the activity for the user
 	    Activity.create({
+            _id:req.body.activity.title,
 	    	title:req.body.activity.title,
-	    	description:activity.description,
-	    	price:activity.price,
-	    	tags:activity.tags,
-	    	address:activity.address,
-	    	creator:user.id,
+	    	description:req.body.activity.description,
+	    	price:req.body.activity.price,
+	    	tags:req.body.activity.tags,
+	    	address:req.body.activity.address,
 	    	upvotes:0,
 	    }, function(err,item) {
 		if (err) {
+            console.log(err);
 		    res.sendStatus(403);
 		    return;
 		}
 		res.json({item:item});
 	    });
-        } else {
-            res.sendStatus(403);
-        }
-    });
+       // } else {
+       //     res.sendStatus(403);
+    //     }
+    // });
 });

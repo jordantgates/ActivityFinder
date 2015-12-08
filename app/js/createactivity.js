@@ -1,4 +1,4 @@
-var ActivityList = require("./activityList.js");
+var API = require("./api.js");
 
 
 var DATA = [
@@ -21,102 +21,96 @@ var DATA = [
         "comment": "Some of the machines were broken. Overall great place."
       }
     ]
-  },
-  {
-    "title": "Frisbee Golf", 
-    "description": "Go to a park and pick targets to make a course.",
-    "price": "0.00", 
-    "tags": ["free", "outdoors", "frisbee", "golf"], 
-    "address": "Any Park",
-    "creator": "Blue42",
-    "upvotes": "3",
-    "comments": [
-        {
-            "user": "tester",
-            "comment": "This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment.This is a long test comment."
-        }
-    ]
-  },
-  {
-    "title": "Little Ceasars",
-    "description": "Best cheap dinner option.",
-    "price": "5.39",
-    "tags": ["dinner", "cheap", "pizza", "party"],
-    "address": "434 N 900 EAST, PROVO, UT 84606",
-    "creator": "Ceasar",
-    "upvotes": "139",
-    "comments": []
   }
 ];
 
 
 var CreateActivity = React.createClass({
-    getInitialState: function(){
+    
+    getInitialState: function() {
         return {
-            keyWords: [],
-            priceMin: 0, 
-            priceMax: Infinity,
-            sort: "popularity"
+            // there was an error on logging in
+            error: false
         };
+    
     },
-
-    handleTextFilter: function(){
-        this.setState({
-            keyWords: this.refs.filterText.value.split(', ')
-        })
-    },
-
-    handlePriceMin: function(){
-        this.setState({
-            priceMin: this.refs.priceMin.value
-        })
-    },
-
-    handlePriceMax: function(){
-        this.setState({
-            priceMax: this.refs.priceMax.value
-        })
-    },
-
-    handleSort: function(){
-        this.setState({
-            sort: this.refs.sort.value
-        })
-    },
-
-    clear: function(){
-        this.setState({
-            keyWords: [],
-            priceMin: 0, 
-            priceMax: Infinity,
-            sort: "popularity"
-        })
-        this.refs.filterText.value = ""
-        this.refs.priceMin.value = ""
-        this.refs.priceMax.value = ""
-        this.refs.sort.value = "popularity"
+    
+    createActivity: function(event){
+        event.preventDefault();
+        
+        var title = this.refs.title.value;
+        var tags = this.refs.tags.value.split(/[ ,]+/);
+        var description = this.refs.description.value;
+        var cost = this.refs.cost.value;
+        var address = this.refs.address.value;
+        var activity = {};
+        activity.title = title;
+        activity.tags = tags;
+        activity.description = description;
+        activity.price = cost;
+        activity.address = address;
+        activity.comments = [];
+        API.createActivity(activity, function(submitSucceeded){
+            if (submitSucceeded){
+                this.forceUpdate();
+            }
+            else{
+                return this.setState({
+                    error: true
+                });
+            }
+        });
     },
 
   render: function(){
     return (
+        
     <div id="wrapper">
         <div id="page-content-wrapper">
             <div className="container-fluid">
                 <div className="row">
                     <div id="none" className="col-lg-12">
-                        <h1>Welcome to Activity Finder</h1>
+                        <h1>Create an Activity</h1>
                         <p>Use the filters on the left to find the perfect activity! Or, browse some of our top rated activities:</p>
                         <br/><br/>
                     </div>
                 </div>
             </div>
-            <ActivityList 
-            data={DATA} 
-            keyWords={this.state.keyWords} 
-            priceMin={this.state.priceMin} 
-            priceMax={this.state.priceMax}
-            sort={this.state.sort}/>
         </div>
+        {this.state.error ? (
+             <div className="alert">Something went wrong.</div>
+           ) : null}
+            <div className="panel panel-primary">
+                <div className="panel-heading">
+                </div>
+                <div className="panel=body">
+                     <form onSubmit={this.createActivity}>
+                        <div className="form-group">
+                            <label htmlFor="ActivityTitle">Title</label>
+                            <input type="text" className="form-control" id="ActivityTitle" placeholder="Activity Title" ref="title"/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="ActivityDescription">Description</label>
+                            <input type="text" className="form-control" id="ActivityDescription" placeholder="Activity Description" ref="description"/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="ActivityTags">Tags</label>
+                            <input type="text" className="form-control" id="ActivityTags" placeholder="Activity Tags" ref="tags"/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="ActivityCost">Price</label>
+                            <span>$<input type="number" className="form-control" id="ActivityCost" ref="cost"/></span>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="ActivityAddress">Address</label>
+                            <input type="text" className="form-control" id="ActivityAddress" placeholder="Activity Adress" ref="address"/>
+                        </div>
+                        
+                        <button type="submit" className="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
+       
     </div>
 
       );

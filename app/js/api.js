@@ -19,6 +19,32 @@ var api = {
                     cb(false, status);
             }
         });
+    },
+    
+    createActivity: function(activity, cb) {
+        var url = "/api/activities";
+        $.ajax({
+            url: url,
+            contentType:'application/json',
+            type: 'POST',
+            data:JSON.stringify({
+                'activity': {
+                    'title': activity.title,
+                    'description': activity.description,
+                    'tags': activity.tags,
+                    'price': activity.price,
+                    'address': activity.address
+                }
+            }),
+            success: function(res) {
+                if (cb)
+                    cb(true, res);
+            },
+            error: function(xhr, status, err) {
+                if (cb)
+                    cb(false, status);
+            }
+        });
     }
 };
 
