@@ -4,7 +4,7 @@ var api = require("./api.js");
 var Activity = React.createClass({
 	getInitialState: function(){
 		return {
-			comment: ""
+			comment: "",
 		}
 	},
 
@@ -22,10 +22,30 @@ var Activity = React.createClass({
 	},
 
 	render: function(){
+
+		if(this.props.item.upvotes > 14){
+			var heart = <span 
+							onClick={this.handleLike} 
+							className="glyphicon glyphicon-heart redHeart" 
+							id="rightAlign" 
+							aria-hidden="true">
+						</span>
+		}else{
+			var heart = <span 
+							onClick={this.handleLike} 
+							className="glyphicon glyphicon-heart heart" 
+							id="rightAlign" 
+							aria-hidden="true">
+						</span>
+		}
+
 		return (
 	        <div className="panel panel-primary" key={this.props.key}>
 	        	<div className="panel-heading">
-	        		<h1 className="panel-title">{this.props.item.title} </h1>
+	        		<h1 className="panel-title">
+	        			{this.props.item.title}
+	        			{heart}
+	        		</h1>
 	        	</div>
 	        	<div className="panel-body">
 					<div><pDesc>{this.props.item.description}</pDesc></div>
