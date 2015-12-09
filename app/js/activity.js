@@ -8,15 +8,6 @@ var Activity = React.createClass({
 		}
 	},
 
-	handleComment: function(){
-		//alert(this.refs.comment.value);
-		this.props.item.comments.push({"user":"jared", "comment":this.refs.comment.value});
-		api.updateActivity(this.props.item, function(){
-			this.forceUpdate();
-		}.bind(this));
-		this.refs.comment.value = "";
-	},
-
 	handleLike: function(){
 		this.props.item.upvotes++;
 		api.updateActivity(this.props.item, function(){
@@ -50,15 +41,6 @@ var Activity = React.createClass({
 						})
 					}
 					</div>
-					<br/>
-					<form onSubmit={this.handleComment}>
-					<div className="input-group">
-						<input aria-describedby="basic-addon2" type="text" className="form-control" placeholder="write a comment..." ref="comment"/>
-						<span className="input-group-btn" id="basic-addon2">
-							<button className="btn btn-primary" type="submit">Submit Comment</button>
-						</span>
-					</div>
-					</form>
 					<br/>
 					<button className="btn btn-primary" onClick={this.handleLike}>Like</button>
 					<button className="btn btn-primary"onClick={this.handleComments} id="rightAlign" >Show/Hide Comments</button>

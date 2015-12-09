@@ -67,8 +67,8 @@ var Home = React.createClass({
         <div id="wrapper">
         <div id="sidebar-wrapper">
             <ul className="sidebar-nav">
-                <li className="sidebar-brand">
-                        Filters
+                <li>
+                        <h1>Filters</h1>
                 </li>
                 <hr/>
                 <li>
