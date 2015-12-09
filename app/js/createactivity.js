@@ -1,30 +1,5 @@
 var API = require("./api.js");
 
-
-var DATA = [
-  {
-    "title": "Nickel City", 
-    "description": "Arcade games for a nickel! Great for a cheap date.",
-    "price": "5.00", 
-    "tags": ["cheap", "gaming", "arcade", "nickel", "date"], 
-    "address": "1515 S State St, Orem, UT 84097",
-    "creator": "alphaMale",
-    "upvotes": "45",
-    "showComments": false,
-    "comments" : [
-      {
-        "user": "Blue42",
-        "comment": "Great Place! Had tons of fun here."
-      },
-      {
-        "user": "Red5",
-        "comment": "Some of the machines were broken. Overall great place."
-      }
-    ]
-  }
-];
-
-
 var CreateActivity = React.createClass({
     
     getInitialState: function() {
@@ -59,13 +34,12 @@ var CreateActivity = React.createClass({
                     error: true
                 });
             }
-        });
+        }.bind(this));
     },
 
   render: function(){
     return (
         
-    <div id="wrapper">
         <div id="page-content-wrapper">
             <div className="container-fluid">
                 <div className="panel panel-primary">
@@ -106,7 +80,6 @@ var CreateActivity = React.createClass({
                 </div>
             </div>
        </div>
-    </div>
 
       );
   }
