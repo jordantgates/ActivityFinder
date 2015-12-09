@@ -42,6 +42,17 @@ pDesc {
     padding: 10px;
 }
 
+.heart {
+    cursor: pointer;
+    cursor: hand;
+}
+
+.redHeart {
+    cursor: pointer;
+    cursor: hand;
+    color: red;
+}
+
 hr {
     display: block;
     margin-top: 0.5em;

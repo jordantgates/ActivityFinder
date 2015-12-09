@@ -4,17 +4,8 @@ var api = require("./api.js");
 var Activity = React.createClass({
 	getInitialState: function(){
 		return {
-			comment: ""
+			comment: "",
 		}
-	},
-
-	handleComment: function(){
-		//alert(this.refs.comment.value);
-		this.props.item.comments.push({"user":"jared", "comment":this.refs.comment.value});
-		api.updateActivity(this.props.item, function(){
-			this.forceUpdate();
-		}.bind(this));
-		this.refs.comment.value = "";
 	},
 
 	handleLike: function(){
@@ -31,10 +22,30 @@ var Activity = React.createClass({
 	},
 
 	render: function(){
+
+		if(this.props.item.upvotes > 14){
+			var heart = <span 
+							onClick={this.handleLike} 
+							className="glyphicon glyphicon-heart redHeart" 
+							id="rightAlign" 
+							aria-hidden="true">
+						</span>
+		}else{
+			var heart = <span 
+							onClick={this.handleLike} 
+							className="glyphicon glyphicon-heart heart" 
+							id="rightAlign" 
+							aria-hidden="true">
+						</span>
+		}
+
 		return (
 	        <div className="panel panel-primary" key={this.props.key}>
 	        	<div className="panel-heading">
-	        		<h1 className="panel-title">{this.props.item.title} </h1>
+	        		<h1 className="panel-title">
+	        			{this.props.item.title}
+	        			{heart}
+	        		</h1>
 	        	</div>
 	        	<div className="panel-body">
 					<div><pDesc>{this.props.item.description}</pDesc></div>
@@ -50,15 +61,6 @@ var Activity = React.createClass({
 						})
 					}
 					</div>
-					<br/>
-					<form onSubmit={this.handleComment}>
-					<div className="input-group">
-						<input aria-describedby="basic-addon2" type="text" className="form-control" placeholder="write a comment..." ref="comment"/>
-						<span className="input-group-btn" id="basic-addon2">
-							<button className="btn btn-primary" type="submit">Submit Comment</button>
-						</span>
-					</div>
-					</form>
 					<br/>
 					<button className="btn btn-primary" onClick={this.handleLike}>Like</button>
 					<button className="btn btn-primary"onClick={this.handleComments} id="rightAlign" >Show/Hide Comments</button>
