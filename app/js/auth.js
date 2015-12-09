@@ -4,6 +4,7 @@ var auth = {
   register: function(email, username, password, cb) {
     // submit request to server, call the callback when complete
     var url = "/api/users/register";
+    console.log("trying to register");
     $.ajax({
       url: url,
       contentType: 'application/json',
@@ -23,6 +24,8 @@ var auth = {
           cb(true);
       }.bind(this),
       error: function(xhr, status, err) {
+        console.log("Error Reg: "+status+" "+err+" "+xhr);
+
         // if there is an error, remove any login token
         delete localStorage.token;
         this.onChange(false);

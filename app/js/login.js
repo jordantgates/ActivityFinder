@@ -29,14 +29,13 @@ var Login = React.createClass( {
     }.bind(this));
 	  },
 
-		RegisterAttempt: function() {
+		registerAttempt: function() {
 	    // get data from form
 			var username = this.refs.registerUsername.value;
 	    var email = this.refs.registerEmail.value;
 	    var password = this.refs.registerPassword.value;
-	    if (!email || !password|| !username) {
-				this.setState({error: true});
-				this.forceUpdate();
+			if (!email || !password|| !username) {
+				window.alert("Please enter information for all fields");
 	      return;
 	    }
 	    // login via API
@@ -106,7 +105,6 @@ var Login = React.createClass( {
 	  													<input type="password" className="form-control" placeholder="Password" ref="registerPassword" aria-describedby="basic-addon2"/>
 														</div>
 														<br/>
-
 	  											<button type="submit" className="btn btn-warning">Register</button>
 													</form>
 												</div>

@@ -28,31 +28,34 @@ app.get('/api/users/likes', function (req, res){
 
 // register a user
 app.post('/api/users/register', function (req, res) {
+  console.log("register@API\n email:"+req.body.user.email+" username:"+
+  req.body.user.username+" password:"+req.body.user.password);
     // find or create the user with the given email
-    User.findOrCreate({_id: req.body.user.email}, function(err, user, created) {
-        if (created) {
-            // if this email is not taken, then create a user record
-            user.email = req.body.user.email;
-            user.set_password(req.body.user.password);
-            user.admin = false;
-            user.activitiesLiked = [];
-            user.username = req.body.user.username;
-            user.save(function(err) {
+    User.findOne({email: req.body.email}, function(err,user) {
+	     if (user) {
+	        res.sendStatus("403");
+	         return;
+         }}),
+    User.create({
+            username:req.body.user.username,
+            _id: req.body.user.email,
+            email:req.body.user.email,
+            password:req.body.user.password,
+            admin:false,
+            activitiesLiked:[],},
+            function(err,item){
 		if (err) {
+      console.log("BEGIN ERROR>>>"+err+"<<<END ERROR");
 		    res.sendStatus("403");
 		    return;
 		}
                 // create a token
-		var token = User.generateToken(user.username);
+                console.log("about to make a dang token with "+item);
+		            var token = User.generateToken(item.username);
                 // return value is JSON containing the user's name and token
-                res.json({username: user.username, token: token});
+                res.json({username: item.username, token: token});
             });
-        } else {
-            // return an error if the username is taken
-            res.sendStatus("403");
-        }
-    });
-});
+        });
 
 // login a user
 app.post('/api/users/login', function (req, res) {

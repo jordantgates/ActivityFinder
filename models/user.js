@@ -13,6 +13,7 @@ var SECRET = '\x1f\x1e1\x8a\x8djO\x9e\xe4\xcb\x9d`\x13\x02\xfb+\xbb\x89q"F\x8a\x
 
 // User info, with Activities created by that user
 var userSchema = new Schema({
+    _id: String,
     email: { type: String, index: true, unique: true},
     username: String,
     password_hash: String,
@@ -37,20 +38,27 @@ userSchema.statics.generateToken = function(email) {
 
 // Verify the token from a client. Call the callback with a user object if successful or null otherwise.
 userSchema.statics.verifyToken = function(token,cb) {
+  console.log("Verifying Token");
+
     if (!token) {
+      console.log("No Token");
         cb(null);
         return;
     }
     // decrypt the token and verify that the encoded user id is valid
     jwt.verify(token, SECRET, function(err, decoded) {
         if (!decoded) {
+          console.log("Nothing after decode");
             cb(null);
             return;
         }
+        console.log(decoded);
         User.findOne({email: decoded.email},function(err,user) {
 	    if (err) {
+          console.log("error decoding");
 		cb(null);
 	    } else {
+          console.log("verified");
 		cb(user);
 	    }
 	});
