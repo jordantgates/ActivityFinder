@@ -29,14 +29,14 @@ app.get('/api/users/likes', function (req, res){
 // register a user
 app.post('/api/users/register', function (req, res) {
     // find or create the user with the given email
-    User.findOrCreate({email: req.body.email}, function(err, user, created) {
+    User.findOrCreate({_id: req.body.user.email}, function(err, user, created) {
         if (created) {
             // if this email is not taken, then create a user record
-            user.email = req.body.email;
-            user.set_password(req.body.password);
+            user.email = req.body.user.email;
+            user.set_password(req.body.user.password);
             user.admin = false;
             user.activitiesLiked = [];
-            user.username = req.body.username;
+            user.username = req.body.user.username;
             user.save(function(err) {
 		if (err) {
 		    res.sendStatus("403");

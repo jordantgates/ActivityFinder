@@ -6,13 +6,14 @@ var auth = {
     var url = "/api/users/register";
     $.ajax({
       url: url,
-      dataType: 'json',
+      contentType: 'application/json',
       type: 'POST',
-      data: {
-        name: email,
-        username: username,
-        password: password
-      },
+      data:JSON.stringify({
+        'user': {
+        'email': email,
+        'username': username,
+        'password': password
+      }}),
       // on success, store a login token
       success: function(res) {
         localStorage.token = res.token;
