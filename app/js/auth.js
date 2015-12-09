@@ -1,7 +1,7 @@
 
 // authentication object
 var auth = {
-  register: function(name, username, password, cb) {
+  register: function(email, username, password, cb) {
     // submit request to server, call the callback when complete
     var url = "/api/users/register";
     $.ajax({
@@ -9,14 +9,14 @@ var auth = {
       dataType: 'json',
       type: 'POST',
       data: {
-        name: name,
+        name: email,
         username: username,
         password: password
       },
       // on success, store a login token
       success: function(res) {
         localStorage.token = res.token;
-        localStorage.name = res.name;
+        localStorage.email = res.email;
         this.onChange(true);
         if (cb)
           cb(true);

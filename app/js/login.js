@@ -3,7 +3,8 @@ var auth = require("./auth.js");
 var Login = React.createClass( {
 
 	// initial state
-	  getInitialState: function() {return {error: false};},
+	  getInitialState: function() {
+			return {error: false};},
 
 	  // handle login button submit
 	  loginAttempt: function() {
@@ -23,6 +24,31 @@ var Login = React.createClass( {
 				this.forceUpdate();
 	      return;
 			}
+			this.setState({error: false});
+			this.forceUpdate();
+    }.bind(this));
+	  },
+
+		RegisterAttempt: function() {
+	    // get data from form
+			var username = this.refs.registerUsername.value;
+	    var email = this.refs.registerEmail.value;
+	    var password = this.refs.registerPassword.value;
+	    if (!email || !password|| !username) {
+				this.setState({error: true});
+				this.forceUpdate();
+	      return;
+	    }
+	    // login via API
+			auth.register(email, username, password, function(loggedIn) {
+      // login callback
+      if (!loggedIn){
+				this.setState({error: true});
+				this.forceUpdate();
+	      return;
+			}
+			this.setState({error: false});
+			this.forceUpdate();
     }.bind(this));
 	  },
 
@@ -61,27 +87,26 @@ var Login = React.createClass( {
 												</div>
 
 												<div className="panel-body">
-													<form>
+														<form onSubmit={this.registerAttempt}>
+														{this.state.error ? (
+		             <p><span className="label label-danger">Login Failed. Invalid username or password.</span></p>
+		           ) : null}
 													<div className="input-group">
 														<span className="input-group-addon" id="basic-addon0">Username</span>
-														<input type="text" className="form-control" placeholder="UserName" aria-describedby="basic-addon0"/>
+														<input type="text" className="form-control" placeholder="UserName" ref="registerUsername" aria-describedby="basic-addon0"/>
 													</div>
 													<br/>
 														<div className="input-group">
 	  													<span className="input-group-addon" id="basic-addon1">Email</span>
-	  													<input type="email" className="form-control" placeholder="Email Address" aria-describedby="basic-addon1"/>
+	  													<input type="email" className="form-control" placeholder="Email Address" ref="registerEmail"  aria-describedby="basic-addon1"/>
 														</div>
 														<br/>
 														<div className="input-group">
 	  													<span className="input-group-addon" id="basic-addon2">Password</span>
-	  													<input type="password" className="form-control" placeholder="Password" aria-describedby="basic-addon2"/>
+	  													<input type="password" className="form-control" placeholder="Password" ref="registerPassword" aria-describedby="basic-addon2"/>
 														</div>
 														<br/>
-														<div className="input-group">
-	  													<span className="input-group-addon" id="basic-addon3"> Retype Password</span>
-	  													<input type="password" className="form-control" placeholder="Password" aria-describedby="basic-addon3"/>
-														</div>
-														<br/>
+
 	  											<button type="submit" className="btn btn-warning">Register</button>
 													</form>
 												</div>
