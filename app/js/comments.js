@@ -3,12 +3,13 @@ var api = require("./api.js");
 var Comments = React.createClass({
 
 	handleComment: function(){
-		//alert(this.refs.comment.value);
-		this.props.activity.comments.unshift({"user":"jared", "comment":this.refs.comment.value});
-		api.updateActivity(this.props.activity, function(){
-			this.forceUpdate();
-		}.bind(this));
-		this.refs.comment.value = "";
+		if(this.refs.comment.value !== ""){
+			this.props.activity.comments.unshift({"user":"jared", "comment":this.refs.comment.value});
+			api.updateActivity(this.props.activity, function(){
+				this.forceUpdate();
+			}.bind(this));
+			this.refs.comment.value = "";
+		}
 	},
 
 	render: function() {
