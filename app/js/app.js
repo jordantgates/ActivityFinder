@@ -13,15 +13,12 @@ var App = React.createClass({
       <div>
       <nav className="navbar navbar-default navbar-fixed-top">
         <div className="container">
-            <ul className="nav navbar-nav">
+            <ul className="nav navbar-nav navbar-left">
                 <li><a href="#">Home</a></li>
-            </ul>
-            <ul className="nav navbar-nav navbar-center">
-                <li><a href="#/createactivity">Submit an Activity Idea</a></li>
+								<li><a href="#/createactivity">Submit an Activity Idea</a></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
-                <li><a href="#/login">Login</a></li>
-                <li><a href="#/register">Register</a></li>
+                <li><a href="#/login">Login/Register</a></li>
             </ul>
         </div>
       </nav>
@@ -40,7 +37,7 @@ var routes = (
     <Route name="home" path="/" component={Home}/>
     <Route name="login" path="/login" component={Login}/>
     <Route path="*" component={Home} />
-    
+
   </Router>
 );
 

@@ -3,12 +3,11 @@ var Login = React.createClass( {
 
 	render: function(){
 		return (
-			<div id="wrapper">
-	        <div id="page-content-wrapper">
-	            <div className="container-fluid">
-	                <div className="panel panel-primary">
-											<div className="panel-heading">
-												<h3 className="panel-title">Login using your email address</h3>
+			<div id="page-content-wrapper">
+				<div className="container-fluid">
+					<div className="panel panel-primary">
+						<div className="panel-heading">
+							<h3>Login using your email address</h3>
 											</div>
 											<div className="panel-body">
 												<form>
@@ -29,7 +28,7 @@ var Login = React.createClass( {
 										<p> - or register below - </p>
 										<div className="panel panel-primary">
 												<div className="panel-heading">
-													<h3 className="panel-title">Register as a new User</h3>
+													<h3 >Register as a new User</h3>
 												</div>
 
 												<div className="panel-body">
@@ -58,9 +57,8 @@ var Login = React.createClass( {
 													</form>
 												</div>
 											</div>
-	                </div>
-	        </div>
-	    </div>
+					</div>
+			</div>
 		); } });
 
 		module.exports = Login;

@@ -95,6 +95,8 @@ hr {
     width: 100%;
     position: absolute;
     padding: 15px;
+
+
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -172,6 +174,8 @@ hr {
     #page-content-wrapper {
         padding: 20px;
         position: relative;
+	max-width: 600px;
+	margin: 0 auto;
     }
 
     #wrapper.toggled #page-content-wrapper {
