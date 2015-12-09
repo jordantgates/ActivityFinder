@@ -3,10 +3,10 @@ var API = require("./api.js");
 
 var DATA = [
   {
-    "title": "Nickel City", 
+    "title": "Nickel City",
     "description": "Arcade games for a nickel! Great for a cheap date.",
-    "price": "5.00", 
-    "tags": ["cheap", "gaming", "arcade", "nickel", "date"], 
+    "price": "5.00",
+    "tags": ["cheap", "gaming", "arcade", "nickel", "date"],
     "address": "1515 S State St, Orem, UT 84097",
     "creator": "alphaMale",
     "upvotes": "45",
@@ -26,18 +26,18 @@ var DATA = [
 
 
 var CreateActivity = React.createClass({
-    
+
     getInitialState: function() {
         return {
             // there was an error on logging in
             error: false
         };
-    
+
     },
-    
+
     createActivity: function(event){
         event.preventDefault();
-        
+
         var title = this.refs.title.value;
         var tags = this.refs.tags.value.split(/[ ,]+/);
         var description = this.refs.description.value;
@@ -64,9 +64,8 @@ var CreateActivity = React.createClass({
 
   render: function(){
     return (
-        
-    <div id="wrapper">
-        <div id="page-content-wrapper">
+
+    <div id="page-content-wrapper">
             <div className="container-fluid">
                 <div className="panel panel-primary">
                     <div className="panel-heading">
@@ -106,8 +105,6 @@ var CreateActivity = React.createClass({
                 </div>
             </div>
        </div>
-    </div>
-
       );
   }
 })
