@@ -42,6 +42,10 @@ var ActivityList = React.createClass({
                       if(this.props.keyWords.length > 0){
                           display = false;
                           this.props.keyWords.forEach(function(tag){
+                            if(item.title.toLowerCase().indexOf(tag.toLowerCase()) > -1){
+                              display = true;
+                              throw "Break";
+                            }
                             item.tags.forEach(function(itemTag){
                               if(itemTag.toLowerCase().indexOf(tag.toLowerCase()) > -1){
                                 display = true;

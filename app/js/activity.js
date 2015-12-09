@@ -12,17 +12,17 @@ var Activity = React.createClass({
 		//alert(this.refs.comment.value);
 		this.props.item.comments.push({"user":"jared", "comment":this.refs.comment.value});
 		api.updateActivity(this.props.item, function(){
-			//do nothing
-		});
-		this.forceUpdate();
+			this.forceUpdate();
+		}.bind(this));
+		this.refs.comment.value = "";
 	},
 
 	handleLike: function(){
 		this.props.item.upvotes++;
 		api.updateActivity(this.props.item, function(){
-			//do nothing
-		})
-		this.forceUpdate();
+			this.forceUpdate();
+		}.bind(this))
+		
 	},
 
 	handleComments: function(){

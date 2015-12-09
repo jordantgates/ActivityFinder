@@ -4,7 +4,7 @@ var Comments = React.createClass({
 		if(this.props.activity.showComments){
 			if(this.props.activity.comments.length > 0){
 				return (
-					<div><br/>{
+					<div  className="scroll"><br/>{
 						this.props.activity.comments.map(function(comment, i){
 								return (
 									<div className="panel panel-success" key={i}>
