@@ -22,7 +22,7 @@ var Activity = React.createClass({
 		api.updateActivity(this.props.item, function(){
 			this.forceUpdate();
 		}.bind(this))
-		
+
 	},
 
 	handleComments: function(){

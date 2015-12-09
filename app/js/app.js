@@ -11,7 +11,7 @@ var App = React.createClass({
 	render: function() {
 		return (
       <div>
-      <nav className="navbar navbar-default navbar-fixed-top">
+      <nav className="navbar navbar-primary navbar-fixed-top">
         <div className="container">
             <ul className="nav navbar-nav navbar-left">
                 <li><a href="#">Home</a></li>

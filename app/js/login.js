@@ -1,6 +1,32 @@
+var auth = require("./auth.js");
+
 var Login = React.createClass( {
 
+	// initial state
+	  getInitialState: function() {return {error: false};},
 
+	  // handle login button submit
+	  loginAttempt: function() {
+	    // get data from form
+	    var email = this.refs.loginEmail.value;
+	    var password = this.refs.loginPassword.value;
+	    if (!email || !password) {
+				this.setState({error: true});
+				this.forceUpdate();
+	      return;
+	    }
+	    // login via API
+			auth.login(email, password, function(loggedIn) {
+      // login callback
+      if (!loggedIn){
+				this.setState({error: true});
+				this.forceUpdate();
+	      return;
+			}
+    }.bind(this));
+	  },
+
+//show login form
 	render: function(){
 		return (
 			<div id="page-content-wrapper">
@@ -10,18 +36,21 @@ var Login = React.createClass( {
 							<h3>Login using your email address</h3>
 											</div>
 											<div className="panel-body">
-												<form>
+												<form onSubmit={this.loginAttempt}>
+												{this.state.error ? (
+             <p><span className="label label-danger">Login Failed. Invalid username or password.</span></p>
+           ) : null}
 													<div className="input-group">
   													<span className="input-group-addon" id="basic-addon1">Email</span>
-  													<input type="email" className="form-control" placeholder="Email Address" aria-describedby="basic-addon1"></input>
+  													<input type="email" className="form-control" placeholder="Email Address" aria-describedby="basic-addon1" ref="loginEmail" autoFocus={true}/>
 													</div>
 													<br/>
 													<div className="input-group">
   													<span className="input-group-addon" id="basic-addon2">Password</span>
-  													<input type="password" className="form-control" placeholder="Password" aria-describedby="basic-addon2"></input>
+  													<input type="password" className="form-control" placeholder="Password" aria-describedby="basic-addon2" ref="loginPassword"/>
 													</div>
 													<br/>
-  											<button type="submit" className="btn btn-primary">Login</button>
+  											<button className="btn btn-warning" type="submit" >Login</button>
 												</form>
 											</div>
 										</div>
@@ -35,25 +64,25 @@ var Login = React.createClass( {
 													<form>
 													<div className="input-group">
 														<span className="input-group-addon" id="basic-addon0">Username</span>
-														<input type="text" className="form-control" placeholder="UserName" aria-describedby="basic-addon0"></input>
+														<input type="text" className="form-control" placeholder="UserName" aria-describedby="basic-addon0"/>
 													</div>
 													<br/>
 														<div className="input-group">
 	  													<span className="input-group-addon" id="basic-addon1">Email</span>
-	  													<input type="email" className="form-control" placeholder="Email Address" aria-describedby="basic-addon1"></input>
+	  													<input type="email" className="form-control" placeholder="Email Address" aria-describedby="basic-addon1"/>
 														</div>
 														<br/>
 														<div className="input-group">
 	  													<span className="input-group-addon" id="basic-addon2">Password</span>
-	  													<input type="password" className="form-control" placeholder="Password" aria-describedby="basic-addon2"></input>
+	  													<input type="password" className="form-control" placeholder="Password" aria-describedby="basic-addon2"/>
 														</div>
 														<br/>
 														<div className="input-group">
 	  													<span className="input-group-addon" id="basic-addon3"> Retype Password</span>
-	  													<input type="password" className="form-control" placeholder="Password" aria-describedby="basic-addon3"></input>
+	  													<input type="password" className="form-control" placeholder="Password" aria-describedby="basic-addon3"/>
 														</div>
 														<br/>
-	  											<button type="submit" className="btn btn-primary">Login</button>
+	  											<button type="submit" className="btn btn-warning">Register</button>
 													</form>
 												</div>
 											</div>
