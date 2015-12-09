@@ -1,18 +1,18 @@
 var API = require("./api.js");
 
 var CreateActivity = React.createClass({
-    
+
     getInitialState: function() {
         return {
             // there was an error on logging in
             error: false
         };
-    
+
     },
-    
+
     createActivity: function(event){
         event.preventDefault();
-        
+
         var title = this.refs.title.value;
         var tags = this.refs.tags.value.split(/[ ,]+/);
         var description = this.refs.description.value;
@@ -39,8 +39,8 @@ var CreateActivity = React.createClass({
 
   render: function(){
     return (
-        
-        <div id="page-content-wrapper">
+
+    <div id="page-content-wrapper">
             <div className="container-fluid">
                 <div className="panel panel-primary">
                     <div className="panel-heading">
@@ -80,7 +80,6 @@ var CreateActivity = React.createClass({
                 </div>
             </div>
        </div>
-
       );
   }
 })

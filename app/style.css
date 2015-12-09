@@ -21,7 +21,7 @@ pDesc {
 
 .scroll {
     position:relative;
-    max-height:200px; 
+    max-height:200px;
     overflow-y:scroll;
 }
 
@@ -33,16 +33,16 @@ pDesc {
 .rcorners-green {
     border-radius: 25px;
     border: 2px solid #73AD21;
-    padding: 20px; 
+    padding: 20px;
 }
 
 .rcorners-blue {
     border-radius: 25px;
     border: 2px solid #003366;
-    padding: 10px; 
+    padding: 10px;
 }
 
-hr { 
+hr {
     display: block;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
@@ -174,8 +174,8 @@ hr {
     #page-content-wrapper {
         padding: 20px;
         position: relative;
-	max-width: 600px;
-	margin: 0 auto;
+				max-width: 800px;
+				margin: 0 auto;
     }
 
     #wrapper.toggled #page-content-wrapper {
