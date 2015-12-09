@@ -13,10 +13,11 @@ var SECRET = '\x1f\x1e1\x8a\x8djO\x9e\xe4\xcb\x9d`\x13\x02\xfb+\xbb\x89q"F\x8a\x
 
 // User info, with Activities created by that user
 var userSchema = new Schema({
-    email: String,
-    username: {type: String, index: true, unique: true},
+    email: {String, index: true, unique: true},
+    username: type: String,
     password_hash: String,
     admin: Boolean,
+    activitesLiked:[String],
 });
 
 // hash the password
@@ -30,8 +31,8 @@ userSchema.methods.checkPassword = function(password) {
 };
 
 // Generate a token for a client
-userSchema.statics.generateToken = function(username) {
-    return jwt.sign({ username: username }, SECRET);
+userSchema.statics.generateToken = function(email) {
+    return jwt.sign({ email: email }, SECRET);
 };
 
 // Verify the token from a client. Call the callback with a user object if successful or null otherwise.
@@ -46,7 +47,7 @@ userSchema.statics.verifyToken = function(token,cb) {
             cb(null);
             return;
         }
-        User.findOne({username: decoded.username},function(err,user) {
+        User.findOne({email: decoded.email},function(err,user) {
 	    if (err) {
 		cb(null);
 	    } else {
