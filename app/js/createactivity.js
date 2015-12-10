@@ -11,10 +11,16 @@ var CreateActivity = React.createClass({
         };
 
     },
+    
+    componentDidMount: function() {
+        if (!localStorage.token){
+            window.location.href = "#/login";
+        }
+    },
 
     createActivity: function(event){
         event.preventDefault();
-        if  (!!localStorage.token){
+        if  (localStorage.token){
             var title = this.refs.title.value;
             var tags = this.refs.tags.value.split(/[ ,]+/);
             var description = this.refs.description.value;
