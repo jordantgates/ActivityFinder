@@ -12,7 +12,6 @@ var App = React.createClass({
 	// logout the user and redirect to home page
   logout: function(event) {
     auth.logout();
-    this.history.pushState(null, '/');
   },
 	// initial state
   getInitialState: function() {

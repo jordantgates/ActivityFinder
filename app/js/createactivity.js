@@ -11,7 +11,7 @@ var CreateActivity = React.createClass({
         };
 
     },
-    
+
     componentDidMount: function() {
         if (!localStorage.token){
             window.location.href = "#/login";
@@ -57,8 +57,8 @@ var CreateActivity = React.createClass({
 
   render: function(){
     return (
-      <div className="container">
-        <div className="row">
+      <div className="container top-buffer">
+        <div className="row top-buffer">
           <div className="col-md-6 col-md-offset-3">
             <div className="panel panel-primary">
                     <div className="panel-heading">
@@ -93,7 +93,7 @@ var CreateActivity = React.createClass({
                             </div>
                             <br/>
                             <button type="submit" className="btn btn-warning">Submit</button>
-                            
+
                         </form>
                         {this.state.success ? (<br/>) : null}
                             {this.state.success ? (<h4><span className="label label-info">Added the new activity</span></h4>) : null}

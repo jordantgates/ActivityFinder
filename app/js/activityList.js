@@ -17,12 +17,12 @@ var ActivityList = React.createClass({
 
         return (
           <div>
-            { 
+            {
               this.props.data.map(function(item, i) {
                 var display = true;
 
                 try{
-                  if(parseFloat(item.price) >= this.props.priceMin && 
+                  if(parseFloat(item.price) >= this.props.priceMin &&
                     parseFloat(item.price) <= this.props.priceMax){
                       if(this.props.keyWords.length > 0){
                           display = false;
@@ -58,8 +58,8 @@ var ActivityList = React.createClass({
               }, this)
             }
             <br/>
-            <p> Note: To see more activities either change the filters to expand your search, 
-            or press "Clear Filters" to return to our top rated activities.</p>
+            <p> Note: To see more activities either change the filters to expand your search,
+            or click the 'reset button' to return to our top rated activities.</p>
           </div>
         );
     }

@@ -10,6 +10,13 @@ p {
 	font-size: 18px;
 }
 
+.whiteText {
+    color: #fff;
+}
+.blueBackground {
+    background-color: #337AB7;
+}
+
 .narrowBlock {
     width: 200px;
     margin: auto;
@@ -74,7 +81,7 @@ hr {
 display: block!important;
 }
 
-.top-buffer { margin-top:5px; }
+.top-buffer { margin-top:10px; }
 
 .navbar-nav>li, .navbar-nav {
 float: left !important;

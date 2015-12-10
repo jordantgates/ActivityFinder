@@ -79,20 +79,20 @@ var Home = React.createClass({
   render: function(){
     return (
       <div>
-        <div className="container top-buffer" >
+        <div className="container-flow" >
           <div className="panel panel-primary">
-            <div className="panel-footer panel-primary">
+            <div className="panel-body blueBackground">
               <div className="row top-buffer">
-                  <div className="col-sm-1 col-sm-offset-1">
-                  <p className="text-center control-label">Sort By:</p>
+                  <div className="col-md-1 col-md-offset-1">
+                  <p className="text-center whiteText pagination-centered">Sort By:</p>
                   </div>
-                  <div className="col-sm-2 ">
+                  <div className="col-md-2 ">
                     <select className="form-control" ref="sort" id="drop" onChange={this.handleSort}>
                       <option value="popularity">Popularity</option>
                       <option value="price">Price</option>
                     </select>
               </div>
-              <div className="col-sm-4 col-sm-offset-3">
+              <div className="col-md-4 col-md-offset-3">
                 <div className="input-group">
                   <span className="input-group-addon" id="basic-addon1">Key words</span>
                   <input type="text" className="form-control" placeholder="e.g. outdoors, date, cheap, winter, etc."
@@ -101,26 +101,26 @@ var Home = React.createClass({
               </div>
               </div>
             <div className="row top-buffer">
-              <div className="col-sm-1 col-sm-offset-1">
-                <p className="text-center control-label">Price:</p>
+              <div className="col-md-1 col-md-offset-1">
+                <p className="text-center whiteText pagination-centered">Price:</p>
                 </div>
 
-                <div className="col-sm-2">
+                <div className="col-md-2">
                   <div className="input-group">
                     <span className="input-group-addon" id="basic-addon1">Min $</span>
                     <input type="number" className="form-control" placeholder="0"
                      aria-describedby="basic-addon1" size="5" ref="priceMin" onChange={this.handlePriceMin}/>
                  </div>
                  </div>
-                 <div className="col-sm-2">
+                 <div className="col-md-2">
                    <div className="input-group">
                        <span className="input-group-addon" id="basic-addon1">Max $</span>
                        <input type="number" className="form-control" placeholder="10"
                         aria-describedby="basic-addon1" size="5" ref="priceMax" onChange={this.handlePriceMax}/>
                      </div>
                      </div>
-                     <div className="col-sm-1 col-sm-offset-4">
-                     <button className="btn btn-primary" onClick={this.clear}>Reset</button>
+                     <div className="col-md-1 col-md-offset-4">
+                     <button className="btn btn-default" onClick={this.clear}>Reset</button>
                      </div>
 </div></div>
       </div>

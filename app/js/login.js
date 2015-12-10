@@ -56,8 +56,8 @@ var Login = React.createClass( {
 //show login form
 	render: function(){
 		return (
-			<div className="container">
-				<div className="row">
+			<div className="container top-buffer">
+				<div className="row top-buffer">
 					<div className="col-sm-5 col-sm-offset-1">
 						<div className="panel panel-primary">
 							<div className="panel-heading">
