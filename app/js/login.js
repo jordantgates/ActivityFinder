@@ -26,7 +26,8 @@ var Login = React.createClass( {
 			}
 			this.setState({error: false});
 			this.forceUpdate();
-    }.bind(this));
+			window.location.href = "#/home";
+	    }.bind(this));
 	  },
 
 		registerAttempt: function() {
@@ -48,6 +49,7 @@ var Login = React.createClass( {
 			}
 			this.setState({error: false});
 			this.forceUpdate();
+			window.location.href = "#/home";
     }.bind(this));
 	  },
 
