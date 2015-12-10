@@ -18,8 +18,6 @@ var Activity = React.createClass({
           if(likes.activities.indexOf(this.props.item.title) > -1){
             liked = true
           }
-          console.log("about to set state")
-          console.log(liked)
           this.setState({
             isLiked: liked
           })
@@ -59,8 +57,6 @@ var Activity = React.createClass({
 	},
 
 	render: function(){
-		console.log("right before setting heart color")
-		console.log(this.state.isLiked)
 		if(this.state.isLiked){
 			var heart = <span 
 							onClick={this.handleLike} 
@@ -68,6 +64,8 @@ var Activity = React.createClass({
 							id="rightAlign" 
 							aria-hidden="true">
 						</span>
+			var likeBtn = <button className="btn btn-primary" onClick={this.handleLike}>Unlike</button>
+
 		}else{
 			var heart = <span 
 							onClick={this.handleLike} 
@@ -75,6 +73,8 @@ var Activity = React.createClass({
 							id="rightAlign" 
 							aria-hidden="true">
 						</span>
+			var likeBtn = <button className="btn btn-primary" onClick={this.handleLike}>Like</button>
+
 		}
 
 		return (
@@ -100,7 +100,7 @@ var Activity = React.createClass({
 					}
 					</div>
 					<br/>
-					<button className="btn btn-primary" onClick={this.handleLike}>Like</button>
+					{likeBtn}
 					<button className="btn btn-primary"onClick={this.handleComments} id="rightAlign" >Show/Hide Comments</button>
 					<Comments activity={this.props.item}/>
 					<br/>
