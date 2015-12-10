@@ -89,8 +89,10 @@ var api = {
             },
             error: function(xhr, status, err) {
                 // if there is any error, remove any login token
-                delete localStorage.token;
-                delete localStorage.username;
+                if(status === 403){
+                    delete localStorage.token;
+                    delete localStorage.username;
+                }
                 if (cb)
                     cb(false, status);
             }
@@ -113,8 +115,10 @@ var api = {
             },
             error: function(xhr, status, err) {
                 // if there is any error, remove any login token
-                delete localStorage.token;
-                delete localStorage.username;
+                if(status === 403){
+                    delete localStorage.token;
+                    delete localStorage.username;
+                }
                 if (cb)
                     cb(false, status);
             }

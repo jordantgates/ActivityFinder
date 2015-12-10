@@ -13,12 +13,12 @@ app.use(bodyParser.urlencoded({
 app.get('/api/users/likes', function (req, res){
   // find the user with the given username
   user = User.verifyToken(req.headers.authorization, function(user) {
-  console.log(user);
+  //console.log(user);
     if (user) {
       res.json({activities: user.activitiesLiked});
       return;
     }
-    res.sendStatus("403");
+    res.sendStatus(403);
     return;
   });
 });
@@ -41,7 +41,7 @@ app.post('/api/users/register', function (req, res) {
           user.save(function(err) {
       if (err) {
         console.log("error building/saving");
-        res.sendStatus("403");
+        res.sendStatus(403);
         return;
       }
             // create a token
@@ -52,7 +52,7 @@ app.post('/api/users/register', function (req, res) {
         } else {
           // return an error if the username is taken
           console.log("error looking");
-          res.sendStatus("403");
+          res.sendStatus(403);
         }
       });
   });
@@ -120,7 +120,7 @@ app.post('/api/activities', function (req,res) {
 });
 
 // update an activity
-// used for adding likes or comments
+// used for adding comments
 app.put('/api/activities/:_id', function (req,res) {
   // validate the supplied token
   user = User.verifyToken(req.headers.authorization, function(user) {
@@ -130,15 +130,15 @@ app.put('/api/activities/:_id', function (req,res) {
       Activity.findById(req.params._id, function(err,activity) {
     if (err) {
       console.log("error: could not find the activity");
-      res.sendStatus(403);
+      res.sendStatus(500);
       return;
     }
-    activity.upvotes = req.body.activity.upvotes;
+    //activity.upvotes = req.body.activity.upvotes;
     activity.comments = req.body.activity.comments;
     activity.save(function(err) {
       if (err) {
         console.log("error saving activity");
-        res.sendStatus(403);
+        res.sendStatus(500);
         return;
       }
           // return value is the item as JSON
@@ -157,20 +157,25 @@ app.put('/api/users/addLike', function (req,res){
   user = User.verifyToken(req.headers.authorization, function(user) {
     console.log(user);
     if(user){
-      user.activitiesLiked.push(req.body.activityTitle);
-      user.save(function(err) {
-        if (err) {
-          console.log("error saving user");
+      if(user.activitiesLiked.indexOf(req.body.activityTitle) === -1){
+          user.activitiesLiked.push(req.body.activityTitle);
+          user.save(function(err) {
+            if (err) {
+              console.log("error saving user");
+              res.sendStatus(500);
+              return;
+            }
+            // return value is the item as JSON
+            res.json({user:user});
+          });
+        } else {
+          console.log("error: invalid user. Failed verification");
           res.sendStatus(403);
-          return;
         }
-        // return value is the item as JSON
-        res.json({user:user});
-      });
-    } else {
-      console.log("error: invalid user. Failed verification");
-      res.sendStatus(403);
-    }
+      }else{
+        console.log("error: already liked that activity");
+        res.sendStatus(500);
+      }
   });
 });
 
@@ -180,19 +185,24 @@ app.put('/api/users/removeLike', function (req,res){
     console.log(user);
     if(user){
       var index = user.activitiesLiked.indexOf(req.body.activityTitle);
-      user.activitiesLiked.splice(index, 1);
-      user.save(function(err) {
-        if (err) {
-          console.log("error saving user");
+      if(index > -1){
+          user.activitiesLiked.splice(index, 1);
+          user.save(function(err) {
+            if (err) {
+              console.log("error saving user");
+              res.sendStatus(500);
+              return;
+            }
+            // return value is the item as JSON
+            res.json({user:user});
+          });
+        } else {
+          console.log("error: invalid user. Failed verification");
           res.sendStatus(403);
-          return;
         }
-        // return value is the item as JSON
-        res.json({user:user});
-      });
-    } else {
-      console.log("error: invalid user. Failed verification");
-      res.sendStatus(403);
+    }else{
+      console.log("error: tried to unlike an activity that was not liked");
+      res.sendStatus(500);
     }
   });
 });
