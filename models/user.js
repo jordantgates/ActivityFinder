@@ -18,7 +18,7 @@ var userSchema = new Schema({
     username: String,
     password_hash: String,
     admin: Boolean,
-    activitesLiked:[String],
+    activitiesLiked:[String],
 });
 
 // hash the password
@@ -59,7 +59,8 @@ userSchema.statics.verifyToken = function(token,cb) {
 		cb(null);
 	    } else {
           console.log("verified");
-		cb(user);
+          console.log(user);
+		  cb(user);
 	    }
 	});
     });

@@ -9,14 +9,13 @@ app.use(bodyParser.urlencoded({
         extended: true
 }));
 
-//
-// API
-//
+// get the list of activities that the current user has liked
 app.get('/api/users/likes', function (req, res){
   // find the user with the given username
   user = User.verifyToken(req.headers.authorization, function(user) {
+  console.log(user);
     if (user) {
-      res.json({activities: user.activitesLiked});
+      res.json({activities: user.activitiesLiked});
       return;
     }
     res.sendStatus("403");
@@ -46,7 +45,7 @@ app.post('/api/users/register', function (req, res) {
         return;
       }
             // create a token
-      var token = User.generateToken(user.username);
+      var token = User.generateToken(user.email);
             // return value is JSON containing the user's name and token
             res.json({username: user.username, token: token});
           });
@@ -95,9 +94,9 @@ app.get('/api/activities', function (req,res) {
 app.post('/api/activities', function (req,res) {
     // validate the supplied token
     // get indexes
-    // user = User.verifyToken(req.headers.authorization, function(user) {
-    //     if (user) {
-            // if the token is valid, create the activity for the user
+    user = User.verifyToken(req.headers.authorization, function(user) {
+    if (user) {
+      //if the token is valid, create the activity for the user
 	    Activity.create({
             _id:req.body.activity.title,
 	    	title:req.body.activity.title,
@@ -114,32 +113,31 @@ app.post('/api/activities', function (req,res) {
 		}
 		res.json({item:item});
 	    });
-       // } else {
-       //     res.sendStatus(403);
-    //     }
-    // });
+    } else {
+        res.sendStatus(403);
+    }
     });
+});
 
 // update an activity
+// used for adding likes or comments
 app.put('/api/activities/:_id', function (req,res) {
   // validate the supplied token
-  //user = User.verifyToken(req.headers.authorization, function(user) {
-    if (true){//user) {
+  user = User.verifyToken(req.headers.authorization, function(user) {
+    console.log(user);
+    if (user) {
       // if the token is valid, then find the requested activity
       Activity.findById(req.params._id, function(err,activity) {
     if (err) {
+      console.log("error: could not find the activity");
       res.sendStatus(403);
       return;
     }
-    // update the item if it belongs to the user, otherwise return an error
-    // if (item.user != user.id) {
-    //   res.sendStatus(403);
-    //   return;
-    // }
     activity.upvotes = req.body.activity.upvotes;
     activity.comments = req.body.activity.comments;
     activity.save(function(err) {
       if (err) {
+        console.log("error saving activity");
         res.sendStatus(403);
         return;
       }
@@ -148,7 +146,54 @@ app.put('/api/activities/:_id', function (req,res) {
         });
       });
     } else {
+      console.log("error: invalid user. Failed verification");
       res.sendStatus(403);
     }
-  //}); //end verifyToken
+  });
 });
+
+app.put('/api/users/addLike', function (req,res){
+  // validate the supplied token
+  user = User.verifyToken(req.headers.authorization, function(user) {
+    console.log(user);
+    if(user){
+      user.activitiesLiked.push(req.body.activityTitle);
+      user.save(function(err) {
+        if (err) {
+          console.log("error saving user");
+          res.sendStatus(403);
+          return;
+        }
+        // return value is the item as JSON
+        res.json({user:user});
+      });
+    } else {
+      console.log("error: invalid user. Failed verification");
+      res.sendStatus(403);
+    }
+  });
+});
+
+app.put('/api/users/removeLike', function (req,res){
+  // validate the supplied token
+  user = User.verifyToken(req.headers.authorization, function(user) {
+    console.log(user);
+    if(user){
+      var index = user.activitiesLiked.indexOf(req.body.activityTitle);
+      user.activitiesLiked.splice(index, 1);
+      user.save(function(err) {
+        if (err) {
+          console.log("error saving user");
+          res.sendStatus(403);
+          return;
+        }
+        // return value is the item as JSON
+        res.json({user:user});
+      });
+    } else {
+      console.log("error: invalid user. Failed verification");
+      res.sendStatus(403);
+    }
+  });
+});
+
