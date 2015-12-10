@@ -48,9 +48,12 @@ var ActivityList = React.createClass({
                 }
 
                 if(display){
-                  return (
-                    <Activity item={item} key={i}/>
-                  );
+                  // if(this.props.likedActivities.indexOf(item.title) > -1){
+                  //     console.log("yay");
+                      return (<Activity item={item} key={i} likedActivities={this.props.likedActivities}/>);
+                  // }else{
+                  //     return (<Activity item={item} key={i} isLiked={0}/>);
+                  // }
                 }
               }, this)
             }

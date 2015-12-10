@@ -5,12 +5,15 @@ var api = require("./api.js");
 var Home = React.createClass({
     getInitialState: function(){
         api.getItems(this.setActivities)
+        // if(!!localStorage.token){
+        //     api.getLikesForUser(this.setLikedActivities)
+        // }
         return {
             keyWords: [],
             priceMin: 0, 
             priceMax: Infinity,
             sort: "popularity",
-            activities: []
+            activities: [],
         };
     },
 
@@ -21,6 +24,14 @@ var Home = React.createClass({
             })
         }
     },
+
+    // setLikedActivities: function(status, items){
+    //     if(status){
+    //         this.setState({
+    //             likedActivities: items.activities
+    //         })
+    //     }
+    // },
 
     handleTextFilter: function(){
         this.setState({
@@ -57,6 +68,8 @@ var Home = React.createClass({
         this.refs.priceMin.value = ""
         this.refs.priceMax.value = ""
         this.refs.sort.value = "popularity"
+        //this.refs.activityList.forceUpdate()
+        this.forceUpdate()
     },
 
   render: function(){
@@ -135,7 +148,7 @@ var Home = React.createClass({
                     </div>
                 </div>
             </div>
-            <ActivityList 
+            <ActivityList ref="activityList"
                 data={this.state.activities}
                 keyWords={this.state.keyWords} 
                 priceMin={this.state.priceMin} 
