@@ -1,6 +1,7 @@
 var Home = require("./home.js");
 var CreateActivity = require("./createactivity.js");
 var Login = require("./login.js");
+var auth = require("./auth.js");
 
 var Router = ReactRouter.Router;
 var Link = ReactRouter.Link;
@@ -8,6 +9,11 @@ var Route = ReactRouter.Route;
 
 
 var App = React.createClass({
+	// logout the user and redirect to home page
+  logout: function(event) {
+    auth.logout();
+    this.history.pushState(null, '/');
+  },
 	// initial state
   getInitialState: function() {
     return {
@@ -19,6 +25,7 @@ var App = React.createClass({
   // callback when user is logged in
   setStateOnAuth: function(loggedIn) {
     this.setState({loggedIn:loggedIn});
+		this.forceUpdate();
   },
 
   // when the component loads, setup the callback
@@ -37,10 +44,10 @@ var App = React.createClass({
             <ul className="nav navbar-nav navbar-right">
 						{this.state.loggedIn ? (
                  <ul className="nav navbar-nav">
-                   <li><a href="#/login">Login/Register</a></li>
                    <li><a href="#" onClick={this.logout}>Logout</a></li>
                  </ul>
-               ) : (<div></div>)}
+               ) : (<li><a href="#/login">Login/Register</a></li>
+							 )}
             </ul>
         </div>
       </nav>
