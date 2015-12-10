@@ -74,38 +74,29 @@ var Home = React.createClass({
 
   render: function(){
     return (
-        <div id="container">
+      <div>
+        <div className="container top-buffer" >
           <div className="panel panel-primary">
-            <div className="panel-heading">
-              <div className="row">
-                <div className="col-sm-3 col-sm-offset-1">
-                <h3>Filters</h3>
-              </div>
-              <div className="col-sm-2 col-sm-offset-6">
-              <button className="btn btn-warning" onClick={this.clear}>Clear Filters</button>
-              </div>
-              </div>
-            </div>
-            <div className="panel-body">
-              <div className="row">
+            <div className="panel-footer panel-primary">
+              <div className="row top-buffer">
                   <div className="col-sm-1 col-sm-offset-1">
                   <p className="text-center control-label">Sort By:</p>
                   </div>
-                  <div className="col-sm-3 ">
+                  <div className="col-sm-2 ">
                     <select className="form-control" ref="sort" id="drop" onChange={this.handleSort}>
                       <option value="popularity">Popularity</option>
                       <option value="price">Price</option>
                     </select>
               </div>
-              <div className="col-sm-3 col-sm-offset-2">
+              <div className="col-sm-4 col-sm-offset-3">
                 <div className="input-group">
                   <span className="input-group-addon" id="basic-addon1">Key words</span>
-                  <input type="text" className="form-control" placeholder="e.g. outdoors, date, cheap, winter"
+                  <input type="text" className="form-control" placeholder="e.g. outdoors, date, cheap, winter, etc."
                    aria-describedby="basic-addon1" ref="filterText" onChange={this.handleTextFilter}/>
                </div>
               </div>
-            </div>
-            <div className="row">
+              </div>
+            <div className="row top-buffer">
               <div className="col-sm-1 col-sm-offset-1">
                 <p className="text-center control-label">Price:</p>
                 </div>
@@ -124,30 +115,28 @@ var Home = React.createClass({
                         aria-describedby="basic-addon1" size="5" ref="priceMax" onChange={this.handlePriceMax}/>
                      </div>
                      </div>
-
-        </div>
-        </div>
-        </div>
-
-        <div id="page-content-wrapper">
-            <div className="container-fluid">
+                     <div className="col-sm-1 col-sm-offset-4">
+                     <button className="btn btn-primary" onClick={this.clear}>Reset</button>
+                     </div>
+</div></div>
+      </div>
+</div>
+        <div className="container">
                 <div className="row">
                     <div id="none" className="col-lg-12">
                         <h1>Welcome to Activity Finder</h1>
-                        <p>Use the filters on the left to find the perfect activity! Or, browse some of our top rated activities:</p>
+                        <p>Use the filters above to find the perfect activity! Or, browse some of our top rated activities:</p>
                         <br/><br/>
                     </div>
                 </div>
-            </div>
-            <ActivityList ref="activityList"
+          <ActivityList ref="activityList"
                 data={this.state.activities}
                 keyWords={this.state.keyWords}
                 priceMin={this.state.priceMin}
                 priceMax={this.state.priceMax}
                 sort={this.state.sort}/>
         </div>
-
-    </div>
+      </div>
 
       );
   }
