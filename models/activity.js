@@ -17,6 +17,7 @@ var activitySchema = new Schema({
 //	creator: String,//{type: ObjectId, ref: 'users'},
 	upvotes: String,
 	comments: [{user: String, comment: String}],
+	usersLiked: [String]
 });
 
 // ensure schemas use virtual IDs

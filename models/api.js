@@ -105,6 +105,7 @@ app.post('/api/activities', function (req,res) {
 	    	tags:req.body.activity.tags,
 	    	address:req.body.activity.address,
 	    	upvotes:0,
+        usersLiked:[]
 	    }, function(err,item) {
 		if (err) {
             console.log(err);
@@ -120,7 +121,7 @@ app.post('/api/activities', function (req,res) {
 });
 
 // update an activity
-// used for adding comments
+// used for adding comments and updating likes
 app.put('/api/activities/:_id', function (req,res) {
   // validate the supplied token
   user = User.verifyToken(req.headers.authorization, function(user) {
@@ -133,8 +134,9 @@ app.put('/api/activities/:_id', function (req,res) {
       res.sendStatus(500);
       return;
     }
-    //activity.upvotes = req.body.activity.upvotes;
+    activity.upvotes = req.body.activity.upvotes;
     activity.comments = req.body.activity.comments;
+    activity.usersLiked = req.body.activity.usersLiked;
     activity.save(function(err) {
       if (err) {
         console.log("error saving activity");

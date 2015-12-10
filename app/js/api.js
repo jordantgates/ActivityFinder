@@ -13,12 +13,13 @@ var api = {
             },
             error: function(xhr, status, err) {
                 // if there is an error, remove the login token
+                delete localStorage.token;
                 if (cb)
                     cb(false, status);
             }
         });
     },
-
+    
     createActivity: function(activity, cb) {
         var url = "/api/activities";
         $.ajax({
@@ -40,8 +41,6 @@ var api = {
                     cb(true, res);
             },
             error: function(xhr, status, err) {
-              delete localStorage.token;
-              delete localStorage.username;
                 if (cb)
                     cb(false, status);
             }
