@@ -57,6 +57,9 @@ var Login = React.createClass( {
 	render: function(){
 		return (
 			<div className="container top-buffer">
+				{this.state.error ? (
+	<h3 ><div className="alert alert-danger text-center" role="alert">Attempt failed, unable to use pairing of password and email</div></h3>
+	) : null}
 				<div className="row top-buffer">
 					<div className="col-sm-5 col-sm-offset-1">
 						<div className="panel panel-primary">
@@ -65,9 +68,7 @@ var Login = React.createClass( {
 							</div>
 							<div className="panel-body">
 								<form onSubmit={this.loginAttempt}>
-												{this.state.error ? (
-             			<p><span className="label label-danger">Login Failed. Invalid username or password.</span></p>
-           				) : null}
+
 									<div className="input-group">
 										<span className="input-group-addon" id="basic-addon1">Email</span>
 										<input type="email" className="form-control" placeholder="Email Address" aria-describedby="basic-addon1" ref="loginEmail" autoFocus={true}/>
@@ -90,9 +91,6 @@ var Login = React.createClass( {
 							</div>
 							<div className="panel-body">
 								<form onSubmit={this.registerAttempt}>
-														{this.state.error ? (
-		             <p><span className="label label-danger">Login Failed. Invalid username or password.</span></p>
-		           ) : null}
 							 		<div className="input-group">
 										<span className="input-group-addon" id="basic-addon0">Username</span>
 										<input type="text" className="form-control" placeholder="UserName" ref="registerUsername" aria-describedby="basic-addon0"/>
