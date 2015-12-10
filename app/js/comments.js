@@ -3,12 +3,17 @@ var api = require("./api.js");
 var Comments = React.createClass({
 
 	handleComment: function(){
-		if(this.refs.comment.value !== ""){
-			this.props.activity.comments.unshift({"user":"jared", "comment":this.refs.comment.value});
-			api.updateActivity(this.props.activity, function(){
-				this.forceUpdate();
-			}.bind(this));
-			this.refs.comment.value = "";
+		if(!!localStorage.token){
+			if(this.refs.comment.value !== ""){
+				var user = localStorage.username;
+				this.props.activity.comments.unshift({"user":user, "comment":this.refs.comment.value});
+				api.updateActivity(this.props.activity, function(){
+					this.forceUpdate();
+				}.bind(this));
+				this.refs.comment.value = "";
+			}
+		}else{
+			alert("Please login or register to comment on activities");
 		}
 	},
 

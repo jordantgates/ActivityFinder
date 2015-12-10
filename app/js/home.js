@@ -2,9 +2,6 @@ var ActivityList = require("./activityList.js");
 var api = require("./api.js");
 
 
-var DATA = [];
-
-
 var Home = React.createClass({
     getInitialState: function(){
         api.getItems(this.setActivities)
@@ -13,7 +10,7 @@ var Home = React.createClass({
             priceMin: 0, 
             priceMax: Infinity,
             sort: "popularity",
-            activities: DATA
+            activities: []
         };
     },
 

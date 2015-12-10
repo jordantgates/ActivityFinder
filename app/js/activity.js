@@ -3,17 +3,52 @@ var api = require("./api.js");
 
 var Activity = React.createClass({
 	getInitialState: function(){
+		if(!!localStorage.token){
+			api.getLikesForUser(this.setLikedActivities)
+		}
 		return {
 			comment: "",
+			isLiked: false,
 		}
 	},
 
-	handleLike: function(){
-		this.props.item.upvotes++;
-		api.updateActivity(this.props.item, function(){
-			this.forceUpdate();
-		}.bind(this))
+	setLikedActivities: function(status, likes){
+        if(status){
+	      var liked = false
+          if(likes.activities.indexOf(this.props.item.title) > -1){
+            liked = true
+          }
+          this.setState({
+            isLiked: liked
+          })
+        }
+    },
 
+	handleLike: function(){
+		if(!!localStorage.token){
+			if(this.state.isLiked){
+				this.props.item.upvotes--;
+				api.removeLike(this.props.item.title, function(){
+					this.setState({
+						isLiked: false
+					})
+					//handle potential error
+				}.bind(this))
+			}else{
+				this.props.item.upvotes++;
+				api.addLike(this.props.item.title, function(){
+					this.setState({
+						isLiked: true
+					})
+					//handle potential error
+				}.bind(this))
+			}
+			api.updateActivity(this.props.item, function(){
+				this.forceUpdate();
+			}.bind(this))
+		}else{
+			alert("Please login or register to like activities");
+		}
 	},
 
 	handleComments: function(){
@@ -22,14 +57,15 @@ var Activity = React.createClass({
 	},
 
 	render: function(){
-
-		if(this.props.item.upvotes > 14){
+		if(this.state.isLiked){
 			var heart = <span 
 							onClick={this.handleLike} 
 							className="glyphicon glyphicon-heart redHeart" 
 							id="rightAlign" 
 							aria-hidden="true">
 						</span>
+			var likeBtn = <button className="btn btn-primary" onClick={this.handleLike}>Unlike</button>
+
 		}else{
 			var heart = <span 
 							onClick={this.handleLike} 
@@ -37,6 +73,8 @@ var Activity = React.createClass({
 							id="rightAlign" 
 							aria-hidden="true">
 						</span>
+			var likeBtn = <button className="btn btn-primary" onClick={this.handleLike}>Like</button>
+
 		}
 
 		return (
@@ -62,7 +100,7 @@ var Activity = React.createClass({
 					}
 					</div>
 					<br/>
-					<button className="btn btn-primary" onClick={this.handleLike}>Like</button>
+					{likeBtn}
 					<button className="btn btn-primary"onClick={this.handleComments} id="rightAlign" >Show/Hide Comments</button>
 					<Comments activity={this.props.item}/>
 					<br/>
