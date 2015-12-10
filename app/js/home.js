@@ -10,7 +10,7 @@ var Home = React.createClass({
         // }
         return {
             keyWords: [],
-            priceMin: 0, 
+            priceMin: 0,
             priceMax: Infinity,
             sort: "popularity",
             activities: [],
@@ -60,7 +60,7 @@ var Home = React.createClass({
     clear: function(){
         this.setState({
             keyWords: [],
-            priceMin: 0, 
+            priceMin: 0,
             priceMax: Infinity,
             sort: "popularity"
         })
@@ -74,68 +74,59 @@ var Home = React.createClass({
 
   render: function(){
     return (
-        <div id="wrapper">
-        <div id="sidebar-wrapper">
-            <ul className="sidebar-nav">
-                <li>
-                        <h1>Filters</h1>
-                </li>
-                <hr/>
-                <li>
-                    <table><tbody><tr>
-                    <td>
-                    <button onClick={this.clear}>Clear Filters</button>
-                    </td><td>&nbsp;</td><td>
-                    Sort by:
-                    <select ref="sort" onChange={this.handleSort}>
+        <div id="container">
+          <div className="panel panel-primary">
+            <div className="panel-heading">
+              <div className="row">
+                <div className="col-sm-3 col-sm-offset-1">
+                <h3>Filters</h3>
+              </div>
+              <div className="col-sm-2 col-sm-offset-6">
+              <button className="btn btn-warning" onClick={this.clear}>Clear Filters</button>
+              </div>
+              </div>
+            </div>
+            <div className="panel-body">
+              <div className="row">
+                  <div className="col-sm-1 col-sm-offset-1">
+                  <p className="text-center control-label">Sort By:</p>
+                  </div>
+                  <div className="col-sm-3 ">
+                    <select className="form-control" ref="sort" id="drop" onChange={this.handleSort}>
                       <option value="popularity">Popularity</option>
                       <option value="price">Price</option>
                     </select>
-                    </td>
-                    </tr></tbody></table>
-                </li>
-                <hr/>
-                <li>
-                    <p>Key words</p>
-                    <input 
-                        type="text" 
-                        className="form-control" 
-                        placeholder="e.g. outdoors, date, cheap, winter" 
-                        ref="filterText"
-                        onChange={this.handleTextFilter}/>
-                </li>
-                <hr/>
-                <li>
-                    <p>Price Range</p>
-                    <p>
-                    $<input 
-                        type="text" 
-                        size="5" 
-                        placeholder="0" 
-                        ref="priceMin"
-                        onChange={this.handlePriceMin}/>
+              </div>
+              <div className="col-sm-3 col-sm-offset-2">
+                <div className="input-group">
+                  <span className="input-group-addon" id="basic-addon1">Key words</span>
+                  <input type="text" className="form-control" placeholder="e.g. outdoors, date, cheap, winter"
+                   aria-describedby="basic-addon1" ref="filterText" onChange={this.handleTextFilter}/>
+               </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-sm-1 col-sm-offset-1">
+                <p className="text-center control-label">Price:</p>
+                </div>
 
-                     &nbsp;-&nbsp; 
+                <div className="col-sm-2">
+                  <div className="input-group">
+                    <span className="input-group-addon" id="basic-addon1">Min $</span>
+                    <input type="number" className="form-control" placeholder="0"
+                     aria-describedby="basic-addon1" size="5" ref="priceMin" onChange={this.handlePriceMin}/>
+                 </div>
+                 </div>
+                 <div className="col-sm-2">
+                   <div className="input-group">
+                       <span className="input-group-addon" id="basic-addon1">Max $</span>
+                       <input type="number" className="form-control" placeholder="10"
+                        aria-describedby="basic-addon1" size="5" ref="priceMax" onChange={this.handlePriceMax}/>
+                     </div>
+                     </div>
 
-                    $<input 
-                        type="text" 
-                        size="5" 
-                        placeholder="10" 
-                        ref="priceMax"
-                        onChange={this.handlePriceMax}/>
-                    </p>
-                </li>
-                <hr/>
-                {/*
-                <li>
-                    <p>Distance</p>
-                    <p>
-                    <input type="text" size="5" placeholder="15" />
-                    &nbsp;miles
-                    </p>
-                </li>
-                */}
-            </ul>
+        </div>
+        </div>
         </div>
 
         <div id="page-content-wrapper">
@@ -150,8 +141,8 @@ var Home = React.createClass({
             </div>
             <ActivityList ref="activityList"
                 data={this.state.activities}
-                keyWords={this.state.keyWords} 
-                priceMin={this.state.priceMin} 
+                keyWords={this.state.keyWords}
+                priceMin={this.state.priceMin}
                 priceMax={this.state.priceMax}
                 sort={this.state.sort}/>
         </div>
