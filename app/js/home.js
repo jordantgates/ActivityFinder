@@ -93,7 +93,7 @@ var Home = React.createClass({
                     </select>
               </div>
               <div className="col-md-4 col-md-offset-3">
-                <div className="input-group">
+                <div className="input-group pull-right">
                   <span className="input-group-addon" id="basic-addon1">Key words</span>
                   <input type="text" className="form-control" placeholder="e.g. outdoors, date, cheap, winter, etc."
                    aria-describedby="basic-addon1" ref="filterText" onChange={this.handleTextFilter}/>
@@ -120,7 +120,7 @@ var Home = React.createClass({
                      </div>
                      </div>
                      <div className="col-md-1 col-md-offset-4">
-                     <button className="btn btn-default" onClick={this.clear}>Reset</button>
+                     <button className="btn btn-default pull-right" onClick={this.clear}>Reset</button>
                      </div>
 </div></div>
       </div>
