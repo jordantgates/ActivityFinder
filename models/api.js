@@ -34,11 +34,11 @@ app.post('/api/users/register', function (req, res) {
     User.findOrCreate({_id: req.body.user.email}, function(err, user, created) {
         if (created) {
           // if this username is not taken, then create a user record
+          user.username = req.body.user.username;
           user.set_password(req.body.user.password);
           user.email = req.body.user.email;
           user.admin=false;
           user.activitiesLiked=[];
-          user.username = req.body.user.username;
           user.save(function(err) {
       if (err) {
         console.log("error building/saving");
@@ -61,13 +61,14 @@ app.post('/api/users/register', function (req, res) {
 
 // login a user
 app.post('/api/users/login', function (req, res) {
+  console.log("login@API\n email:"+req.body.user.email);
     // find the user with the given username
-    User.findOne({email: req.body.email}, function(err,user) {
+    User.findOne({email: req.body.user.email}, function(err,user) {
 	    if (err) {
 	      res.sendStatus(403);
 	      return;}
         // validate the user exists and the password is correct
-        if (user && user.checkPassword(req.body.password)) {
+        if (user && user.checkPassword(req.body.user.password)) {
             // create a token
             var token = User.generateToken(user.email);
             // return value is JSON containing user's username and token

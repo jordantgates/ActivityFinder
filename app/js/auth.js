@@ -28,6 +28,7 @@ var auth = {
 
         // if there is an error, remove any login token
         delete localStorage.token;
+        delete localStorage.username;
         this.onChange(false);
         if (cb)
           cb(false);
@@ -35,7 +36,7 @@ var auth = {
     });
   },
   // login the user
-  login: function(username, password, cb) {
+  login: function(email, password, cb) {
     // submit login request to server, call callback when complete
     cb = arguments[arguments.length - 1];
     // check if token in local storage
@@ -50,16 +51,17 @@ var auth = {
     var url = "/api/users/login";
     $.ajax({
       url: url,
-      dataType: 'json',
+      contentType: 'application/json',
       type: 'POST',
-      data: {
-        username: username,
-        password: password
-      },
+      data:JSON.stringify({
+        'user': {
+        'email': email,
+        'password': password
+      }}),
       success: function(res) {
         // on success, store a login token
         localStorage.token = res.token;
-        localStorage.name = res.name;
+        localStorage.username = res.username;
         this.onChange(true);
         if (cb)
           cb(true);
@@ -67,6 +69,7 @@ var auth = {
       error: function(xhr, status, err) {
         // if there is an error, remove any login token
         delete localStorage.token;
+        delete localStorage.username;
         this.onChange(false);
         if (cb)
           cb(false);
