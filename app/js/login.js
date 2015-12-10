@@ -54,62 +54,64 @@ var Login = React.createClass( {
 //show login form
 	render: function(){
 		return (
-			<div id="page-content-wrapper">
-				<div className="container-fluid">
-					<div className="panel panel-primary">
-						<div className="panel-heading">
-							<h3>Login using your email address</h3>
-											</div>
-											<div className="panel-body">
-												<form onSubmit={this.loginAttempt}>
+			<div className="container">
+				<div className="row">
+					<div className="col-sm-5 col-sm-offset-1">
+						<div className="panel panel-primary">
+							<div className="panel-heading">
+								<h3>Login using your email address</h3>
+							</div>
+							<div className="panel-body">
+								<form onSubmit={this.loginAttempt}>
 												{this.state.error ? (
-             <p><span className="label label-danger">Login Failed. Invalid username or password.</span></p>
-           ) : null}
-													<div className="input-group">
-  													<span className="input-group-addon" id="basic-addon1">Email</span>
-  													<input type="email" className="form-control" placeholder="Email Address" aria-describedby="basic-addon1" ref="loginEmail" autoFocus={true}/>
-													</div>
-													<br/>
-													<div className="input-group">
-  													<span className="input-group-addon" id="basic-addon2">Password</span>
-  													<input type="password" className="form-control" placeholder="Password" aria-describedby="basic-addon2" ref="loginPassword"/>
-													</div>
-													<br/>
-  											<button className="btn btn-warning" type="submit" >Login</button>
-												</form>
-											</div>
-										</div>
-										<p> - or register below - </p>
-										<div className="panel panel-primary">
-												<div className="panel-heading">
-													<h3 >Register as a new User</h3>
-												</div>
-
-												<div className="panel-body">
-														<form onSubmit={this.registerAttempt}>
+             			<p><span className="label label-danger">Login Failed. Invalid username or password.</span></p>
+           				) : null}
+									<div className="input-group">
+										<span className="input-group-addon" id="basic-addon1">Email</span>
+										<input type="email" className="form-control" placeholder="Email Address" aria-describedby="basic-addon1" ref="loginEmail" autoFocus={true}/>
+									</div>
+									<br/>
+									<div className="input-group">
+										<span className="input-group-addon" id="basic-addon2">Password</span>
+										<input type="password" className="form-control" placeholder="Password" aria-describedby="basic-addon2" ref="loginPassword"/>
+									</div>
+									<br/>
+									<button className="btn btn-warning" type="submit" >Login</button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div className="col-sm-5">
+						<div className="panel panel-primary">
+							<div className="panel-heading">
+								<h3 >Register as a new User</h3>
+							</div>
+							<div className="panel-body">
+								<form onSubmit={this.registerAttempt}>
 														{this.state.error ? (
 		             <p><span className="label label-danger">Login Failed. Invalid username or password.</span></p>
 		           ) : null}
-													<div className="input-group">
-														<span className="input-group-addon" id="basic-addon0">Username</span>
-														<input type="text" className="form-control" placeholder="UserName" ref="registerUsername" aria-describedby="basic-addon0"/>
-													</div>
-													<br/>
-														<div className="input-group">
-	  													<span className="input-group-addon" id="basic-addon1">Email</span>
-	  													<input type="email" className="form-control" placeholder="Email Address" ref="registerEmail"  aria-describedby="basic-addon1"/>
-														</div>
-														<br/>
-														<div className="input-group">
-	  													<span className="input-group-addon" id="basic-addon2">Password</span>
-	  													<input type="password" className="form-control" placeholder="Password" ref="registerPassword" aria-describedby="basic-addon2"/>
-														</div>
-														<br/>
-	  											<button type="submit" className="btn btn-warning">Register</button>
-													</form>
-												</div>
-											</div>
+							 		<div className="input-group">
+										<span className="input-group-addon" id="basic-addon0">Username</span>
+										<input type="text" className="form-control" placeholder="UserName" ref="registerUsername" aria-describedby="basic-addon0"/>
+									</div>
+									<br/>
+									<div className="input-group">
+										<span className="input-group-addon" id="basic-addon1">Email</span>
+										<input type="email" className="form-control" placeholder="Email Address" ref="registerEmail"  aria-describedby="basic-addon1"/>
+									</div>
+									<br/>
+									<div className="input-group">
+										<span className="input-group-addon" id="basic-addon2">Password</span>
+										<input type="password" className="form-control" placeholder="Password" ref="registerPassword" aria-describedby="basic-addon2"/>
+									</div>
+									<br/>
+									<button type="submit" className="btn btn-warning">Register</button>
+								</form>
+							</div>
+						</div>
 					</div>
+				</div>
 			</div>
 		); } });
 

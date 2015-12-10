@@ -40,9 +40,10 @@ var CreateActivity = React.createClass({
   render: function(){
     return (
 
-    <div id="page-content-wrapper">
-            <div className="container-fluid">
-                <div className="panel panel-primary">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6 col-md-offset-3">
+            <div className="panel panel-primary">
                     <div className="panel-heading">
                         <h3>Create an Activity</h3>
                     </div>
@@ -59,8 +60,8 @@ var CreateActivity = React.createClass({
                             </div>
                             <br/>
                             <div className="input-group">
-  								<span className="input-group-addon" id="Tags-addon">Tags</span>
-                                <input type="text" className="form-control" id="ActivityTags" placeholder="Activity Tags" ref="tags"/>
+  								<span className="input-group-addon" id="Tags-addon">Activity Tags</span>
+                                <input type="text" className="form-control" id="ActivityTags" placeholder="Outdoors, romantic, food-based, seasonal, etc..." ref="tags"/>
                             </div>
                             <br/>
                             <div className="input-group">
@@ -74,11 +75,12 @@ var CreateActivity = React.createClass({
                                 <input type="text" className="form-control" id="ActivityAddress" placeholder="Activity Adress" ref="address"/>
                             </div>
                             <br/>
-                            <button type="submit" className="btn btn-primary">Submit</button>
+                            <button type="submit" className="btn btn-warning">Submit</button>
                         </form>
                     </div>
                 </div>
             </div>
+       </div>
        </div>
       );
   }
