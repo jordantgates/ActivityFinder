@@ -8,6 +8,23 @@ var Route = ReactRouter.Route;
 
 
 var App = React.createClass({
+	// initial state
+  getInitialState: function() {
+    return {
+      // the user is logged in
+      loggedIn: auth.loggedIn()
+    };
+  },
+
+  // callback when user is logged in
+  setStateOnAuth: function(loggedIn) {
+    this.setState({loggedIn:loggedIn});
+  },
+
+  // when the component loads, setup the callback
+  componentWillMount: function() {
+    auth.onChange = this.setStateOnAuth;
+  },
 	render: function() {
 		return (
       <div>
@@ -18,7 +35,12 @@ var App = React.createClass({
 								<li><a href="#/createactivity">Submit an Activity Idea</a></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
-                <li><a href="#/login">Login/Register</a></li>
+						{this.state.loggedIn ? (
+                 <ul className="nav navbar-nav">
+                   <li><a href="#/login">Login/Register</a></li>
+                   <li><a href="#" onClick={this.logout}>Logout</a></li>
+                 </ul>
+               ) : (<div></div>)}
             </ul>
         </div>
       </nav>
