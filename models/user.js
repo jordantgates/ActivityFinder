@@ -13,7 +13,7 @@ var SECRET = '\x1f\x1e1\x8a\x8djO\x9e\xe4\xcb\x9d`\x13\x02\xfb+\xbb\x89q"F\x8a\x
 
 // User info, with Activities created by that user
 var userSchema = new Schema({
-    _id: String,
+    _id: { type: String, index: true, unique: true},
     email: { type: String, index: true, unique: true},
     username: String,
     password_hash: String,
