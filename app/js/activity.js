@@ -27,25 +27,33 @@ var Activity = React.createClass({
 	handleLike: function(){
 		if(!!localStorage.token){
 			if(this.state.isLiked){
-				this.props.item.upvotes--;
-				api.removeLike(this.props.item.title, function(){
-					this.setState({
-						isLiked: false
-					})
-					//handle potential error
+				api.removeLike(this.props.item.title, function(success){
+					if(success){
+						api.updateActivity(this.props.item, function(good){
+							if(good){
+								this.props.item.upvotes--;
+								this.setState({
+									isLiked: false
+								})
+							}
+						}.bind(this))
+					}
 				}.bind(this))
 			}else{
-				this.props.item.upvotes++;
-				api.addLike(this.props.item.title, function(){
-					this.setState({
-						isLiked: true
-					})
-					//handle potential error
+				api.addLike(this.props.item.title, function(success){
+					if(success){
+						api.updateActivity(this.props.item, function(good){
+							if(good){
+								this.props.item.upvotes++;
+								this.setState({
+									isLiked: true
+								})
+							}
+						}.bind(this))
+					}
 				}.bind(this))
 			}
-			api.updateActivity(this.props.item, function(){
-				this.forceUpdate();
-			}.bind(this))
+			
 		}else{
 			alert("Please login or register to like activities");
 		}
