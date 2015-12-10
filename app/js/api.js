@@ -7,7 +7,6 @@ var api = {
             url: url,
             dataType: 'json',
             type: 'GET',
-            //headers: {'Authorization': localStorage.token},
             success: function(res) {
                 if (cb)
                     cb(true, res);
@@ -57,7 +56,7 @@ var api = {
         activity: activity
       }),
       type: 'PUT',
-      //headers: {'Authorization': localStorage.token},
+      headers: {'Authorization': localStorage.token},
       success: function(res) {
         if (cb)
           cb(true, res);
