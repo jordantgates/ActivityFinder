@@ -1,23 +1,8 @@
 var Activity = require("./activity.js");
 var api = require("./api.js");
+var auth = require("./auth.js");
 
 var ActivityList = React.createClass({
-
-    // handleComments: function(i){
-    //   i.showComments = !i.showComments;
-    //   this.forceUpdate();
-    // },
-
-    // handleComment: function(i, item){
-    //   //alert(this.refs.{i}.value);
-    //   //api.addComment(i);
-    //   //this.forceUpdate();
-    // },
-
-    // handleLike: function(i){
-    //   api.addLike(i);
-    //   this.forceUpdate();
-    // },
 
     render: function() {
         if(this.props.sort === "popularity"){
@@ -63,7 +48,6 @@ var ActivityList = React.createClass({
                 }
 
                 if(display){
-                  empty = false
                   return (
                     <Activity item={item} key={i}/>
                   );

@@ -3,17 +3,54 @@ var api = require("./api.js");
 
 var Activity = React.createClass({
 	getInitialState: function(){
+		if(!!localStorage.token){
+			api.getLikesForUser(this.setLikedActivities)
+		}
 		return {
 			comment: "",
+			isLiked: false,
 		}
 	},
 
-	handleLike: function(){
-		this.props.item.upvotes++;
-		api.updateActivity(this.props.item, function(){
-			this.forceUpdate();
-		}.bind(this))
+	setLikedActivities: function(status, likes){
+        if(status){
+	      var liked = false
+          if(likes.activities.indexOf(this.props.item.title) > -1){
+            liked = true
+          }
+          console.log("about to set state")
+          console.log(liked)
+          this.setState({
+            isLiked: liked
+          })
+        }
+    },
 
+	handleLike: function(){
+		if(!!localStorage.token){
+			if(this.state.isLiked){
+				this.props.item.upvotes--;
+				api.removeLike(this.props.item.title, function(){
+					this.setState({
+						isLiked: false
+					})
+					//handle potential error
+				}.bind(this))
+			}else{
+				this.props.item.upvotes++;
+				api.addLike(this.props.item.title, function(){
+					this.setState({
+						isLiked: true
+					})
+					//handle potential error
+				}.bind(this))
+			}
+			api.updateActivity(this.props.item, function(){
+				this.forceUpdate();
+			}.bind(this))
+		}else{
+			alert("Please login or register to like activities");
+		}
 	},
 
 	handleComments: function(){
@@ -22,8 +59,9 @@ var Activity = React.createClass({
 	},
 
 	render: function(){
-
-		if(this.props.item.upvotes > 14){
+		console.log("right before setting heart color")
+		console.log(this.state.isLiked)
+		if(this.state.isLiked){
 			var heart = <span 
 							onClick={this.handleLike} 
 							className="glyphicon glyphicon-heart redHeart" 
