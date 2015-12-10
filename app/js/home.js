@@ -46,8 +46,12 @@ var Home = React.createClass({
     },
 
     handlePriceMax: function(){
+        var max = this.refs.priceMax.value;
+        if(this.refs.priceMax.value === ""){
+            max = Infinity;
+        }
         this.setState({
-            priceMax: this.refs.priceMax.value
+            priceMax: max
         })
     },
 
