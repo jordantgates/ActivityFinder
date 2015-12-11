@@ -42,9 +42,10 @@ var App = React.createClass({
             </ul>
             <ul className="nav navbar-nav navbar-right">
 						{this.state.loggedIn ? (
-                 <ul className="nav navbar-nav">
+              <ul className="nav navbar-nav navbar-right">
+                   <li className="active"><a>Welcome {localStorage.username}!</a></li>
                    <li><a href="#" onClick={this.logout}>Logout</a></li>
-                 </ul>
+              </ul>
                ) : (<li><a href="#/login">Login/Register</a></li>
 							 )}
             </ul>
