@@ -127,18 +127,22 @@ var Home = React.createClass({
 </div>
         <div className="container">
                 <div className="row">
-                    <div id="none" className="col-lg-12">
-                        <h1>Welcome to Activity Finder</h1>
-                        <p>Use the filters above to find the perfect activity! Or, browse some of our top rated activities:</p>
+                    <div id="none" className="col-md-offset-1 col-md-10">
+                        <h1 className="text-center">Welcome to Activity Finder</h1>
+                        <p className="text-center">Use the filters above to find the perfect activity! Or, browse some of our top rated activities:</p>
                         <br/><br/>
                     </div>
                 </div>
-          <ActivityList ref="activityList"
-                data={this.state.activities}
-                keyWords={this.state.keyWords}
-                priceMin={this.state.priceMin}
-                priceMax={this.state.priceMax}
-                sort={this.state.sort}/>
+                <div className="row">
+                    <div id="none" className="col-md-offset-1 col-md-10">
+                      <ActivityList ref="activityList"
+                            data={this.state.activities}
+                            keyWords={this.state.keyWords}
+                            priceMin={this.state.priceMin}
+                            priceMax={this.state.priceMax}
+                            sort={this.state.sort}/>
+                    </div>
+                </div>
         </div>
       </div>
 
