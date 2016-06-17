@@ -14,10 +14,10 @@ var User = require('./models/user.js');
 var Activity = require('./models/activity.js');
 
 // start the server
-var port = 80;
+var port = 8080;
 var server = app.listen(port, function() {
-	var reportString="Started on port 80";
-console.log(reportString);
-var host = server.address().address;
-var port = server.address().port;
+    var reportString = "Started on port " + port;
+	console.log(reportString);
+	var host = server.address().address;
+	var port = server.address().port;
 });
