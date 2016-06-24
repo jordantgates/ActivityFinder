@@ -8,16 +8,16 @@ var findOrCreate = require('mongoose-findorcreate')
 
 // Activity schema
 var activitySchema = new Schema({
-	_id: String,
-	title: String,
-	description: String,
-	price: String,
-	tags: [String],
-	address: String,
+    _id: String,
+    title: String,
+    description: String,
+    price: String,
+    tags: [String],
+    address: String,
 //	creator: String,//{type: ObjectId, ref: 'users'},
-	upvotes: String,
-	comments: [{user: String, comment: String}],
-	usersLiked: [String]
+    upvotes: String,
+    comments: [{user: String, comment: String}],
+    usersLiked: [String]
 });
 
 // ensure schemas use virtual IDs
